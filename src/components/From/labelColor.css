@@ -1,0 +1,7 @@
+
+  .custom-label .ant-form-item-label > label {
+    color: white !important; /* Use !important to override any conflicting styles */
+  }
+  
+  /* Add more colors as needed */
+  

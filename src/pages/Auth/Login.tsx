@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
+import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,9 +35,15 @@ const Login = () => {
                   Keep me signed in
                 </label>
               </div>
-              <button className="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium uppercase  hover:bg-white text-black">
+              {/* <button className="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium uppercase  hover:bg-white text-black hover:transition-all">
                 Submit
-              </button>
+               
+              </button> */}
+              <ButtonBackgroundShine
+                name="Create Account"
+                width="full
+               "
+              />
             </form>
             <p className="mt-6 flex gap-1 text-sm text-white">
               Did you
