@@ -7,8 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        pageBg: {
+          DEFAULT: '#1b1b1b', // You can change this value to your desired primary color
+          light: '#ffffff',
+          dark: '#1b1b1b',
+        },
         primary: {
-          DEFAULT: '#2e5b3d', // You can change this value to your desired primary color
+          DEFAULT: '#ffb84b', // You can change this value to your desired primary color
           light: '#6cb2eb',
           dark: '#2779bd',
         },
