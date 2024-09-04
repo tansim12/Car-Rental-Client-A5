@@ -4,6 +4,8 @@ import CustomInput from "../../components/From/CustomInput";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
 import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "../../Schemas/authSchema";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,7 +24,10 @@ const Register = () => {
           </p>
         </div>
         <div>
-          <CustomForm onSubmit={onSubmit}>
+          <CustomForm
+            onSubmit={onSubmit}
+            resolver={zodResolver(registerSchema)}
+          >
             <div>
               <CustomInput
                 name="name"
@@ -70,12 +75,7 @@ const Register = () => {
                 />
               </div>
             </div>
-
-            {/* <button className="rounded-md hover:bg-white bg-primary text-black hover:transition-all px-4 py-2  transition-color">
-              Submit
-            </button> */}
-            <ButtonBackgroundShine name="Submit" width="full"/>
-          
+            <ButtonBackgroundShine name="Submit" width="full" />
           </CustomForm>
           <div className="text-center mt-4 ">
             <span>
