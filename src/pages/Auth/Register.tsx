@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../components/From/CustomForm";
 import CustomInput from "../../components/From/CustomInput";
@@ -6,11 +7,46 @@ import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
 import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../Schemas/authSchema";
-
+import toast from "react-hot-toast";
+import { useRegisterMutation } from "../../Redux/Feature/Auth/authApi";
+import { useAppDispatch } from "../../Redux/hook";
+import { setUser } from "../../Redux/Feature/Auth/authSlice";
+import verifyToken from "../../utils/verifyToken";
+import { handleApiError } from "../../utils/handleApiError";
+const defaultData = {
+  name: "abccc",
+  password: "password123",
+  confirmPassword: "password123",
+  email: "u3@gmail.com",
+  phone: "01849184020",
+};
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [register, ] = useRegisterMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    if (data?.password !== data?.confirmPassword) {
+      return toast.error("Password are not same");
+    }
+    const { confirmPassword, ...payload } = data;
+    const toastId = toast.loading("Register pending...");
+    try {
+      const res = await register(payload).unwrap();
+      if (res.success) {
+        const userData = verifyToken(res?.data?.accessToken);
+        dispatch(
+          setUser({ user: userData?.data, token: res?.data?.accessToken })
+        );
+        navigate(`/`);
+        toast.success("Login Successfully done", {
+          id: toastId,
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      handleApiError(error, toastId);
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-screen   bg-pageBg">
@@ -27,6 +63,7 @@ const Register = () => {
           <CustomForm
             onSubmit={onSubmit}
             resolver={zodResolver(registerSchema)}
+            defaultValues={defaultData}
           >
             <div>
               <CustomInput

@@ -1,9 +1,41 @@
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
 import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
+import CustomForm from "../../components/From/CustomForm";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
+import CustomInput from "../../components/From/CustomInput";
+import { useLoginMutation } from "../../Redux/Feature/Auth/authApi";
+import verifyToken from "../../utils/verifyToken";
+import { useAppDispatch } from "../../Redux/hook";
+import { setUser } from "../../Redux/Feature/Auth/authSlice";
+import { handleApiError } from "../../utils/handleApiError";
+
+const defaultValue = { email: "u4@gmail.com", password: "password123" };
 
 const Login = () => {
   const navigate = useNavigate();
+  const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Register pending...");
+    try {
+      const res = await login(data).unwrap();
+      if (res.success) {
+        const userData = verifyToken(res?.data?.accessToken);
+        dispatch(
+          setUser({ user: userData?.data, token: res?.data?.accessToken })
+        );
+        navigate(`/`);
+        toast.success("Login Successfully done", {
+          id: toastId,
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      handleApiError(error, toastId);
+    }
+  };
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-pageBg">
       <div className="max-w-3xl bg-white p-6 shadow-md sm:px-8 sm:py-10 lg:px-12 lg:py-16 dark:bg-zinc-900">
@@ -13,17 +45,21 @@ const Login = () => {
             <h2 className="mb-6 text-3xl font-semibold tracking-tight text-white">
               Sign In
             </h2>
-            <form>
-              <div className="mb-4 flex flex-col space-y-4">
-                <input
-                  className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:outline-none dark:border-zinc-700 focus:ring-1"
-                  placeholder="Username"
-                  type="text"
+            <CustomForm onSubmit={onSubmit} defaultValues={defaultValue}>
+              <div className="  ">
+                <CustomInput
+                  name="email"
+                  label="Email"
+                  type="email"
+                  isLabelColor={true}
+                  placeholder={"abc@gmail.com"}
                 />
-                <input
-                  className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:outline-none dark:border-zinc-700 focus:ring-1"
-                  placeholder="Password"
+                <CustomInput
+                  name="password"
+                  label="password"
                   type="password"
+                  isLabelColor={true}
+                  placeholder={"password"}
                 />
               </div>
               <div className="mb-6 flex items-center space-x-2 accent-sky-600">
@@ -44,7 +80,7 @@ const Login = () => {
                 width="full
                "
               />
-            </form>
+            </CustomForm>
             <p className="mt-6 flex gap-1 text-sm text-white">
               Did you
               <a className="text-sky-500 underline" href="#">
