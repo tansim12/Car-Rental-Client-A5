@@ -6,7 +6,7 @@ type TTimePickerProps = {
   label?: string;
 };
 
-const PHTimePicker = ({ name, label }: TTimePickerProps) => {
+const CustomTimePicker = ({ name, label }: TTimePickerProps) => {
   const format = "HH:mm";
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -29,4 +29,4 @@ const PHTimePicker = ({ name, label }: TTimePickerProps) => {
   );
 };
 
-export default PHTimePicker;
+export default CustomTimePicker;

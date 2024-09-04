@@ -1,23 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Select } from "antd";
-import { Controller } from "react-hook-form";
+import { useEffect } from "react";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 
-type TPHSelectProps = {
+type TPHSelectWithWatchProps = {
   label: string;
   name: string;
   options: { value: string; label: string; disabled?: boolean }[] | undefined;
   customStyle?: string;
   disabled?: boolean;
   mode?: "multiple" | undefined;
+  changeOnValue: any;
 };
 
-const PHSelect = ({
+const CustomSelectWithWatch = ({
   label,
   name,
   options,
   customStyle,
   disabled,
   mode,
-}: TPHSelectProps) => {
+  changeOnValue,
+}: TPHSelectWithWatchProps) => {
+  const { control } = useFormContext();
+  const inputValue = useWatch({
+    control,
+    name,
+  });
+console.log(inputValue);
+
+  useEffect(() => {
+    changeOnValue(inputValue);
+  }, [ inputValue]);
   return (
     <div className={`${customStyle}`}>
       <Controller
@@ -40,4 +54,4 @@ const PHSelect = ({
   );
 };
 
-export default PHSelect;
+export default CustomSelectWithWatch;

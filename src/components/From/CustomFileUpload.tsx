@@ -7,7 +7,7 @@ type TFileUploadProps = {
   type?: string;
 };
 
-const PHFileUpload = ({ name, label, type }: TFileUploadProps) => {
+const CustomFileUpload = ({ name, label, type }: TFileUploadProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Controller
@@ -33,4 +33,4 @@ const PHFileUpload = ({ name, label, type }: TFileUploadProps) => {
   );
 };
 
-export default PHFileUpload;
+export default CustomFileUpload;
