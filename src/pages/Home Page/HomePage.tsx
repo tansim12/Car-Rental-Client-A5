@@ -1,3 +1,4 @@
+import BannerCard from "../../components/ui/BannerCard/BannerCard";
 import HomePageSlider from "../../components/ui/Slider/HomePageSlider";
 
 
@@ -9,7 +10,7 @@ const HomePage = () => {
         <HomePageSlider />
       </div>
       <div className=''>
-        Extra
+       <BannerCard />
       </div>
     </div>
   );
