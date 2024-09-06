@@ -9,11 +9,11 @@ const HomePageSlider: React.FC = () => {
   };
 
   return (
-    <div className="">
+    <div className="relative">
       {/* Conditionally display image until the video is ready */}
       {!videoLoaded && (
         <img
-          src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/14.jpg"
+          src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/7.jpg"
           alt="Background"
           className="h-[100vh] w-screen object-cover absolute top-0 left-0"
         />
