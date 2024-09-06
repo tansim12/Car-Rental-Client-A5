@@ -1,17 +1,12 @@
+import HomePageSlider from "../../components/ui/Slider/HomePageSlider";
 
 
 const HomePage = () => {
   return (
-    <div className='h-[150vh] bg-red-400 mt-10 '>
+    <div className='h-[150vh] bg-red-400 '>
        {/* slider  */}
-       <div className="absolute top-0 ">
-        <div className=" ">
-          <img
-            src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/14.jpg"
-            alt=""
-            className=" h-[80vh] w-screen object-cover"
-          />
-        </div>
+       <div className="">
+        <HomePageSlider />
       </div>
       <div className=''>
         Extra

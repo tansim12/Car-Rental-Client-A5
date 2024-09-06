@@ -4,9 +4,10 @@ import CustomNavLink from "../../../utils/customNavlink";
 
 const Navbar = () => {
   return (
-    <div className="absolute  w-full">
+    <div className="absolute w-full  ">
       {/* navbar  */}
-      <div className="bg-transparent  w-full sticky top-0 z-50 ">
+      {/* <div className="bg-pageBg opacity-30 h-16 absolute w-full"></div> */}
+      <div className="bg-transparent  w-full sticky top-0 z-[999px]  ">
         <div className="w-full max-w-7xl mx-auto p-1 sm:p-2 ">
           <div className=" justify-between gap-2  md:visible flex items-center ">
             {/* logo div  */}
