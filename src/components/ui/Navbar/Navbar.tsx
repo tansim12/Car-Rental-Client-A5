@@ -2,8 +2,10 @@ import { MdPhoneCallback } from "react-icons/md";
 import MenuDrawer from "./MenuDrawer";
 import CustomNavLink from "../../../utils/customNavlink";
 import logo from '../../../assets/Image/logo.png';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <div className="absolute w-full  ">
       {/* navbar  */}
@@ -14,9 +16,10 @@ const Navbar = () => {
             {/* logo div  */}
             <div className="w-[25%]">
               <img
+              onClick={()=>navigate("/")}
                 src={logo}
                 alt="logo"
-                className="w-fit h-6"
+                className="w-fit h-6 cursor-pointer"
               />
             </div>
             {/* menu div  */}

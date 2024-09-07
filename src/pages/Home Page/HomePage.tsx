@@ -7,7 +7,7 @@ import HomePageSlider from "../../components/ui/Slider/HomePageSlider";
 
 const HomePage = () => {
   return (
-    <div className=" bg-pageBg">
+    <div className=" ">
       {/* slider  */}
       <div className="">
         <HomePageSlider />
@@ -16,12 +16,12 @@ const HomePage = () => {
         <BannerCard />
       </div>
       {/* feature section  */}
-      <div className="bg-pageBg ">
+      <div className=" ">
         <FeaturedSection />
       </div>
       <div className=" ">{/* <WhyChooseUs /> */}</div>
       {/* customer reviews  */}
-      <div className="bg-pageBg">
+      <div className="">
         <Container>
           <CustomerReview />
         </Container>
