@@ -1,11 +1,11 @@
 import { MdPhoneCallback } from "react-icons/md";
 import MenuDrawer from "./MenuDrawer";
 import CustomNavLink from "../../../utils/customNavlink";
-import logo from '../../../assets/Image/logo.png';
+import logo from "../../../assets/Image/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="absolute w-full  ">
       {/* navbar  */}
@@ -16,7 +16,7 @@ const Navbar = () => {
             {/* logo div  */}
             <div className="w-[25%]">
               <img
-              onClick={()=>navigate("/")}
+                onClick={() => navigate("/")}
                 src={logo}
                 alt="logo"
                 className="w-fit h-6 cursor-pointer"
@@ -26,7 +26,7 @@ const Navbar = () => {
             <div className=" hidden md:flex justify-evenly items-center gap-5 w-[75%] ">
               <div className="text-white flex  gap-5 text-sm w-full justify-end">
                 <CustomNavLink label="Home" to="/" fontWidth="16px" />
-                <CustomNavLink label="About" to="/about" fontWidth="16px" />
+                <CustomNavLink label="Car Listing" to="/listing" fontWidth="16px" />
                 <CustomNavLink label="Home" to="/" fontWidth="16px" />
                 <CustomNavLink label="About" to="/about" fontWidth="16px" />
                 <CustomNavLink label="Home" to="/" fontWidth="16px" />

@@ -95,7 +95,7 @@ const Footer = () => {
             Want to be notified about our services? Just sign up and we'll send
             you a notification by email.
           </p>
-          <div>
+          <div className="my-5">
             <img
               onClick={() => navigate("/")}
               src={logo}
