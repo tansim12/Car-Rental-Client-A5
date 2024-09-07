@@ -18,11 +18,11 @@ const CustomButton: React.FC<TCustomButtonProps> = ({
   return (
     <div>
       {isTransParent ? (
-        <Button className="mt-4 cursor-pointer z-20 bg-transparent border-secondary px-5 py-5 md:px-10 md:py-7 text-white hover:bg-white hover:text-black text-lg">
+        <Button htmlType="submit" className="mt-4 cursor-pointer z-20 bg-transparent border-secondary px-5 py-5 md:px-10 md:py-7 text-white hover:bg-white hover:text-black text-lg">
           <Icon size={size} /> Location
         </Button>
       ) : (
-        <Button className="mt-4 cursor-pointer z-20 bg-secondary border-none px-5 py-5 md:px-10 md:py-7 text-white hover:bg-white hover:text-black text-lg">
+        <Button htmlType="submit"  className="mt-4 cursor-pointer z-20 bg-secondary border-none px-5 py-5 md:px-10 md:py-7 text-white hover:bg-white hover:text-black text-lg">
           {name} <Icon size={size} />
         </Button>
       )}

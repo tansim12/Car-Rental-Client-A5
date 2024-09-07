@@ -22,6 +22,11 @@ export default {
           // light: '#6cb2eb',
           // dark: '#2779bd',
         },
+        filterColor: {
+          DEFAULT: '#1B1B1B',
+          // light: '#6cb2eb',
+          // dark: '#2779bd',
+        },
       },
       animation: {
         "background-shine": "background-shine 2s linear infinite"
