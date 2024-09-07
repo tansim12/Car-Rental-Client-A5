@@ -4,7 +4,7 @@ import HomePage from "../pages/Home Page/HomePage";
 import NoFoundPage from "../pages/No Found/NoFoundPage";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
-import Listing from "../pages/Listing/Listing";
+import CarListing from "../pages/Listing/CarListing";
 // import DashboardLayout from "../Layout/Dashboard Layout/DashboardLayout";
 // import PaymentSuccess from "../pages/Payment Success & Failed/PaymentSuccess";
 // import AdminDashboard from "../Layout/Admin Dashboard/AdminDashboard";
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "listing",
-        element: <Listing />,
+        element: <CarListing />,
       },
     ],
   },

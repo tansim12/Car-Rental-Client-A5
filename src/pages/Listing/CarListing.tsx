@@ -1,6 +1,6 @@
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
 
-const Listing = () => {
+const CarListing = () => {
   return (
     <div>
       <div className="">
@@ -16,4 +16,4 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+export default CarListing;
