@@ -1,29 +1,29 @@
-import { useEffect, useRef } from 'react'
-import { animate, scroll, spring } from 'motion'
-import { ReactLenis } from 'lenis/react'
+import { useEffect, useRef } from "react";
+import { animate, scroll, spring } from "motion";
+import { ReactLenis } from "lenis/react";
 
 const WhyChooseUs = () => {
-  const ulRef = useRef<HTMLUListElement | null>(null)
+  const ulRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     const ulElement = ulRef.current;
     if (!ulElement) {
-      console.error('ulRef.current is null');
+      console.error("ulRef.current is null");
       return;
     }
-  
-    const items = document.querySelectorAll('li');
+
+    const items = ulElement.querySelectorAll("li");
     if (items.length === 0) {
-      console.error('No list items found');
+      console.error("No list items found");
       return;
     }
-  
-    const section = document.querySelector('section');
+
+    const section = document.querySelector("section");
     if (!section) {
-      console.error('Section element not found');
+      console.error("Section element not found");
       return;
     }
-  
+
     const controls = animate(
       ulElement,
       {
@@ -31,18 +31,18 @@ const WhyChooseUs = () => {
       },
       { easing: spring() }
     );
-  
+
     scroll(controls, { target: section });
-  
+
     const segmentLength = 1 / items.length;
     items.forEach((item, i) => {
-      const header = item.querySelector('h2');
-      
+      const header = item.querySelector("h2");
+
       if (header) {
         const animation = animate([header], { x: [800, -800] });
-        
-        console.log('Animation for header:', animation);
-  
+
+        console.log("Animation for header:", animation);
+
         scroll(animation, {
           target: section,
           offset: [
@@ -68,9 +68,12 @@ const WhyChooseUs = () => {
                 So Scroll
               </h1>
             </header>
-            <section className="h-[500vh] relative">
-              <ul ref={ulRef} className="flex sticky top-0 w-screen">
-                <li className="h-screen w-[1000px]  bg-red-400 flex flex-col justify-center overflow-hidden items-center">
+            <section className="h-[500vh] relative   ">
+              <ul
+                ref={ulRef}
+                className="flex sticky top-0  border-4 border-red-800 "
+              >
+                <li className="h-screen w-screen flex-shrink-0 bg-red-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     PASSION
                   </h2>
@@ -82,7 +85,7 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-                <li className="h-screen w-screen bg-blue-400 flex flex-col justify-center overflow-hidden items-center">
+                <li className="h-screen w-screen flex-shrink-0 bg-blue-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     WORK
                   </h2>
@@ -94,7 +97,7 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-                <li className="h-screen w-screen bg-orange-400 flex flex-col justify-center overflow-hidden items-center">
+                <li className="h-screen w-screen flex-shrink-0 bg-orange-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     MOTIVATION
                   </h2>
@@ -106,7 +109,7 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-                <li className="h-screen w-screen bg-yellow-400 flex flex-col justify-center overflow-hidden items-center">
+                <li className="h-screen w-screen  flex-shrink-0 bg-yellow-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     INSPIRATION
                   </h2>
@@ -118,7 +121,7 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-                <li className="h-screen w-screen bg-green-400 flex flex-col justify-center overflow-hidden items-center">
+                <li className="h-screen w-screen flex-shrink-0 bg-green-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     BELIEVE
                   </h2>
@@ -132,20 +135,12 @@ const WhyChooseUs = () => {
                 </li>
               </ul>
             </section>
-            <footer className="bg-red-600 text-white grid place-content-center h-[80vh]">
-              <p>
-                Created By{' '}
-                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/mattgperry">
-                  Matt Perry
-                </a>
-              </p>
-            </footer>
           </article>
           <div className="progress fixed left-0 right-0 h-2 rounded-full bg-red-600 bottom-[50px] scale-x-0"></div>
         </main>
       </ReactLenis>
     </div>
-  )
-}
+  );
+};
 
-export default WhyChooseUs
+export default WhyChooseUs;

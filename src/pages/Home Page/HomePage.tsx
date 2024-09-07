@@ -3,7 +3,7 @@ import Container from "../../components/ui/Container";
 import CustomerReview from "../../components/ui/Customer Review/CustomerReview";
 import FeaturedSection from "../../components/ui/Featured Section/FeaturedSection";
 import HomePageSlider from "../../components/ui/Slider/HomePageSlider";
-// import WhyChooseUs from "../../components/ui/Why Choose Us/WhyChooseUs";
+import WhyChooseUs from "../../components/ui/Why Choose Us/WhyChooseUs";
 
 const HomePage = () => {
   return (
@@ -19,7 +19,9 @@ const HomePage = () => {
       <div className=" ">
         <FeaturedSection />
       </div>
-      <div className=" ">{/* <WhyChooseUs /> */}</div>
+      <div className="">
+        <WhyChooseUs />
+        </div>
       {/* customer reviews  */}
       <div className="">
         <Container>
