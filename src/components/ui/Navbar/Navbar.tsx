@@ -1,19 +1,20 @@
 import { MdPhoneCallback } from "react-icons/md";
 import MenuDrawer from "./MenuDrawer";
 import CustomNavLink from "../../../utils/customNavlink";
+import logo from '../../../assets/Image/logo.png';
 
 const Navbar = () => {
   return (
     <div className="absolute w-full  ">
       {/* navbar  */}
-      {/* <div className="bg-pageBg opacity-30 h-16 absolute w-full"></div> */}
+      <div className="bg-pageBg opacity-30 h-16 absolute w-full"></div>
       <div className="bg-transparent  w-full sticky top-0 z-[999px]  ">
         <div className="w-full max-w-7xl mx-auto p-1 sm:p-2 ">
           <div className=" justify-between gap-2  md:visible flex items-center ">
             {/* logo div  */}
             <div className="w-[25%]">
               <img
-                src="https://webredox.net/demo/wp/renax/wp-content/themes/renax/includes/img/logo-light.png"
+                src={logo}
                 alt="logo"
                 className="w-fit h-6"
               />

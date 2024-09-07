@@ -11,7 +11,7 @@ type CardProps = {
 const InfoCard: React.FC<CardProps> = ({ title, description, stepNumber }) => {
   return (
     
-      <div className="relative bg-secondary hover:bg-white cursor-pointer rounded-xl shadow-lg p-5 text-start h-[250px]  lg:w-[300px] mx-2 transition-all duration-300 transform hover:-translate-y-6">
+      <div className="relative bg-secondary hover:bg-white cursor-pointer rounded-xl shadow-lg p-5 text-start h-[210px]  lg:w-[300px] mx-2 transition-all duration-300 transform hover:-translate-y-6">
         {/* Step number background */}
         <div className="absolute right-[-15px] bottom-[-60px] z-[999px] text-pageBg opacity-90 text-[150px] sm:text-[180px] font-extrabold">
           {stepNumber}
@@ -51,7 +51,7 @@ const BannerCard: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center items-center mt-[-50px] h-[120vh] lg:h-max bg-pageBg ">
+    <div className="flex flex-wrap justify-center items-center mt-[-50px] h-[120vh] lg:h-max bg-pageBg p-3">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 ">
         {/* Map over card data to render cards dynamically */}
         {cardData.map((card) => (
