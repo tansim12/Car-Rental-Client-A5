@@ -1,0 +1,34 @@
+/* CustomPagination.css */
+.custom-pagination .ant-pagination-item-active {
+  background-color: #ffb84b;
+  border-color: #ffb84b;
+}
+
+.custom-pagination .ant-pagination-item {
+  color: #ffb84b;
+  border-color: #ffb84b;
+}
+
+.custom-pagination .ant-pagination-item:hover {
+  background-color: ffb84b;
+  border-color: #ffb84b;
+}
+
+.custom-pagination .ant-pagination-item a {
+  color: inherit; /* to inherit the gold color */
+}
+
+.custom-pagination .ant-pagination-item-active a {
+  color: black;
+}
+
+.ant-pagination-options-quick-jumper {
+  color: white;
+}
+
+.ant-pagination-item-link {
+  color: white !important;
+}
+.ant-pagination-item-ellipsis{
+  color: white !important;
+}

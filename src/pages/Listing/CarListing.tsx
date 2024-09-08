@@ -1,10 +1,19 @@
+import { PaginationProps } from "antd";
 import CarCard from "../../components/ui/Car Card/CarCard";
 import Container from "../../components/ui/Container";
 import Filter from "../../components/ui/Filter/Filter";
 import FilterDrawer from "../../components/ui/Filter/FilterDrawer";
+import CustomPagination from "../../components/ui/Pagination/CustomPagination";
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
 
 const CarListing = () => {
+    const handlePagination: PaginationProps["onChange"] = (
+    pageNumber,
+    pageSize
+  ) => {
+    console.log(pageNumber, pageSize);
+    // setParams([{ name: "page", value: pageNumber }, ...params]);
+  };
   return (
     <div>
       <div className="">
@@ -33,6 +42,10 @@ const CarListing = () => {
               <CarCard />
             </div>
           </div>
+        </div>
+        {/* pagination div  */}
+        <div className="flex justify-center items-center my-20">
+          <CustomPagination limit={4} total={100} handlePagination={handlePagination} />
         </div>
       </Container>
     </div>
