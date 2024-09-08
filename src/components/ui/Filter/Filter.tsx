@@ -58,10 +58,10 @@ const handleSearch = (e: FormEvent<HTMLFormElement>) => {
   // }
 };
   return (
-    <div className="bg-filterColor shadow-2xl border-white border-2 rounded-3xl p-3 border-opacity-25 text-white">
+    <div className=" shadow-2xl   text-white ">
       
       {/* search section  */}
-      <div className="h-32 bg-secondary rounded-t-xl flex justify-center items-center w-full">
+      <div className="h-24 bg-secondary rounded-t-xl flex justify-center items-center w-full">
       <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
@@ -79,9 +79,9 @@ const handleSearch = (e: FormEvent<HTMLFormElement>) => {
       </div>
       
       
-      <div>
+      <div className="bg-filterColor px-5 rounded-b-3xl p-3 ">
         <CustomForm onSubmit={onSubmit}>
-          <div className="w-72">
+          <div className="w-56">
             <CustomCollapse
               label="Availability"
               name="availability"

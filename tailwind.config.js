@@ -23,7 +23,7 @@ export default {
           // dark: '#2779bd',
         },
         filterColor: {
-          DEFAULT: '#1B1B1B',
+          DEFAULT: '#212121',
           // light: '#6cb2eb',
           // dark: '#2779bd',
         },

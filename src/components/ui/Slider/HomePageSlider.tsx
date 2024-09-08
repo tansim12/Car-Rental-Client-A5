@@ -57,7 +57,7 @@ const HomePageSlider: React.FC = () => {
           </div>
           <div>
             <CustomButton
-              name="Book Now"
+              name="Location"
               isTransParent={true}
               icon={BiCurrentLocation}
               size={20}
