@@ -26,6 +26,7 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
 
     const payload = {
       pickupArea: data.pickupArea,
+      carId: carData?._id,
       dropOffArea: data.dropOffArea,
       startDate, // Start date formatted as YYYY-MM-DD
       endDate, // End date formatted as YYYY-MM-DD

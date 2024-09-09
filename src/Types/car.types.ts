@@ -32,6 +32,7 @@ export enum TAvailableArea {
 }
 
 export interface TCar {
+  _id:string,
   name: string;
   category: TCarCategory;
   brand: string;
