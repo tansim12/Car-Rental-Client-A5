@@ -6,6 +6,10 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import CarListing from "../pages/Listing/CarListing";
 import CarDetails from "../pages/Car Details/CarDetails";
+import { adminRoutes } from "./route.admin";
+import MainLayout from "../Layout/Dashboard Layout/MainLayout";
+import PrivateRoute from "./PrivateRoute";
+import { userRoutes } from "./route.user";
 // import DashboardLayout from "../Layout/Dashboard Layout/DashboardLayout";
 // import PaymentSuccess from "../pages/Payment Success & Failed/PaymentSuccess";
 // import AdminDashboard from "../Layout/Admin Dashboard/AdminDashboard";
@@ -26,23 +30,31 @@ export const router = createBrowserRouter([
       },
       {
         path: "car-details/:id",
-        element: <CarDetails  />,
+        element: <CarDetails />,
       },
     ],
   },
 
-  // {
-  //   path: "admin",
-  //   element: <DashboardLayout />,
-  //   errorElement: <NoFoundPage />,
-  //   children: [
-  //     {
-  //       path: "all-products-management",
-  //       element: <AllProductManagement />,
-  //     },
-
-  //   ],
-  // },
+  //   admin routes
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute role="admin">
+        <MainLayout />
+      </PrivateRoute>
+    ),
+    children: adminRoutes,
+  },
+  // //   student routes
+  {
+    path: "/user",
+    element: (
+      <PrivateRoute role="user">
+        <MainLayout />
+      </PrivateRoute>
+    ),
+    children: userRoutes,
+  },
 
   {
     path: "/login",

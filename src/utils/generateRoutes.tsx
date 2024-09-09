@@ -1,5 +1,4 @@
-import { IAccRoutes } from "../types/admin.types";
-
+import { IAccRoutes } from "../Types/routes.type";
 
 export const generateRoutes = (path: IAccRoutes[]) => {
   return path.reduce((acc: IAccRoutes[], item) => {

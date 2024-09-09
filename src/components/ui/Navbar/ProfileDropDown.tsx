@@ -9,10 +9,9 @@ import toast from "react-hot-toast";
 
 type ProfileDropDownProps = {
   userData: Partial<TUser>;
-  
 };
 
-const ProfileDropDown = ({ userData,  }: ProfileDropDownProps) => {
+const ProfileDropDown = ({ userData }: ProfileDropDownProps) => {
   const dispatch = useDispatch();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const ProfileDropDown = ({ userData,  }: ProfileDropDownProps) => {
 
   const handleLogout = () => {
     const toastId = toast.loading("Logout pending");
-     dispatch(logout());
+    dispatch(logout());
     toast.success("Logout Successfully done", { id: toastId, duration: 2000 });
   };
 
@@ -59,7 +58,7 @@ const ProfileDropDown = ({ userData,  }: ProfileDropDownProps) => {
           </div>
           <div
             className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
-            onClick={() => handleNavigation("/dashboard")}
+            onClick={() => handleNavigation(`/${userData?.role}/dashboard`)}
           >
             Dashboard
           </div>
