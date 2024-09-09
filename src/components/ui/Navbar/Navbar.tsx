@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const user = useAppSelector((s) => s?.auth?.user);
   const id = user ? user?.id : null;
-  const { data:userData, refetch } = useGetUserInfoQuery(id,{skip:!id});
+  const { data:userData,  } = useGetUserInfoQuery(id,{skip:!id});
 
   return (
     <div className="absolute w-full  ">
@@ -48,7 +48,7 @@ const Navbar = () => {
 
                 {userData?.status === USER_STATUS.active && id ? (
                   <div>
-                    <ProfileDropDown userData={userData as Partial<TUser>} refetch={refetch} />
+                    <ProfileDropDown userData={userData as Partial<TUser>}  />
                   </div>
                 ) : (
                   <div onClick={() => navigate("/login")}>

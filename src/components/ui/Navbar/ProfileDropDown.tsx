@@ -9,10 +9,10 @@ import toast from "react-hot-toast";
 
 type ProfileDropDownProps = {
   userData: Partial<TUser>;
-  refetch: any;
+  
 };
 
-const ProfileDropDown = ({ userData, refetch }: ProfileDropDownProps) => {
+const ProfileDropDown = ({ userData,  }: ProfileDropDownProps) => {
   const dispatch = useDispatch();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -32,10 +32,7 @@ const ProfileDropDown = ({ userData, refetch }: ProfileDropDownProps) => {
 
   const handleLogout = () => {
     const toastId = toast.loading("Logout pending");
-    const x = dispatch(logout());
-    console.log(x);
-
-    refetch();
+     dispatch(logout());
     toast.success("Logout Successfully done", { id: toastId, duration: 2000 });
   };
 
