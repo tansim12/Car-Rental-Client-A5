@@ -1,4 +1,4 @@
-import BookingInfo from "../../components/ui/Booking Info/BookingInfo";
+import BookingForm from "../../components/ui/Booking/BookingForm";
 import Container from "../../components/ui/Container";
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
 import { FaCheck } from "react-icons/fa6";
@@ -49,7 +49,7 @@ const CarDetails = () => {
 
             {/* Booking Info */}
             <div className="col-span-12 md:col-span-5 p-4  md:-mt-28 opacity-90">
-              <BookingInfo />
+              <BookingForm />
             </div>
           </div>
         </Container>
@@ -59,3 +59,45 @@ const CarDetails = () => {
 };
 
 export default CarDetails;
+
+const dummyData = {
+  _id: "66d4aefec8e2acb52b10846d",
+  name: "Toyota Camry 23",
+  category: "Luxury",
+  brand: "Toyota",
+  description: "A comfortable and reliable sedan with great fuel efficiency.",
+  type: "New Arrival",
+  model: "Camry XSE",
+  VIN: "4T1BF1FK6HU123456",
+  licensePlate: "ABC1234",
+  color: "Silver",
+  mileage: 25000,
+  rentalPricePerDay: 500,
+  advance: 100,
+  availability: "available",
+  availableAreas: ["Dhaka", "Chittagong", "Sylhet", "Pabna"],
+  numberOfDoors: 4,
+  seatingCapacity: 5,
+  features: ["Leather seats", "Sunroof", "Bluetooth connectivity"],
+  safetyFeatures: ["Anti-lock braking system", "Airbags", "Rearview camera"],
+  images: [
+    "https://res.cloudinary.com/dgm9w4vwh/image/upload/v1725214459/image_1725214457904.jpg",
+  ],
+  faqs: [
+    {
+      question: "What is the fuel efficiency of the car?",
+      answer: "The car has a fuel efficiency of 28 miles per gallon.",
+      id: "66d4aefec8e2acb52b10846e",
+    },
+    {
+      question: "Is the car available for long-term rentals?",
+      answer:
+        "Yes, the car is available for both short-term and long-term rentals.",
+      id: "66d4aefec8e2acb52b10846f",
+    },
+  ],
+  isDeleted: false,
+  createdAt: "2024-09-01T18:14:22.564Z",
+  updatedAt: "2024-09-03T14:33:33.919Z",
+  version: 0,
+};
