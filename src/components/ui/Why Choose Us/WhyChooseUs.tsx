@@ -71,7 +71,7 @@ const WhyChooseUs = () => {
             <section className="h-[500vh] relative   ">
               <ul
                 ref={ulRef}
-                className="flex sticky top-0  border-4 border-red-800 "
+                className="flex sticky top-0"
               >
                 <li className="h-screen w-screen flex-shrink-0 bg-red-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">

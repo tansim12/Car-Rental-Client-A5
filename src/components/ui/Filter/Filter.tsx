@@ -7,7 +7,7 @@ import {
   carAvailabilityArray,
   carAvailableAreaArray,
   carCategoryArray,
-} from "../../../Types/car.types";
+} from "../../../Const/car.const";
 import CustomForm from "../../From/CustomForm";
 import CustomCollapse from "../../From/CustomCollapse";
 import CustomCollapseMultiple from "../../From/CustomCollapseMultiple";

@@ -1,7 +1,9 @@
 import { FaDoorOpen } from "react-icons/fa";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = () => {
+  const navigate = useNavigate();
   return (
     <div className="shadow-2xl bg-filterColor rounded-2xl">
       {/* img div  */}
@@ -50,10 +52,14 @@ const CarCard = () => {
             <span className="text-gray-500"> /day</span>
           </p>
 
-          <div >
-          <Button htmlType="submit"  className={` cursor-pointer z-20 bg-secondary border-none px-5 py-5 lg:px-10 lg:py-7 text-black hover:bg-white hover:text-black text-lg`}>
-           <FaDoorOpen size={20} /> Book 
-        </Button>
+          <div>
+            <Button
+              onClick={() => navigate(`/car-details/12`)}
+              htmlType="submit"
+              className={` cursor-pointer z-20 bg-secondary border-none px-5 py-5 lg:px-10 lg:py-7 text-black hover:bg-white hover:text-black text-lg`}
+            >
+              <FaDoorOpen size={20} /> Book
+            </Button>
           </div>
         </div>
       </div>
