@@ -2,6 +2,8 @@ import BookingForm from "../../components/ui/Booking/BookingForm";
 import Container from "../../components/ui/Container";
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
 import { FaCheck } from "react-icons/fa6";
+import { TCar } from "../../Types/car.types";
+import Faqs from "../../components/ui/Car Details Faqs/Faqs";
 const CarDetails = () => {
   return (
     <div>
@@ -16,7 +18,7 @@ const CarDetails = () => {
         </div>
       </div>
       {/* details div  */}
-      <div>
+      <div className="px-2">
         <Container>
           <div className="grid grid-cols-12 gap-5">
             {/* General Information */}
@@ -24,13 +26,7 @@ const CarDetails = () => {
               <p className="font-bold text-lg sm:text-2xl my-3">
                 General Information
               </p>
-              <p className="text-sm">
-                Lorem pretium fermentum quam, sit amet cursus ante sollicitudin
-                velen morbi consesua the miss sustion consation porttitor orci
-                sit amet iaculis nisan. Lorem pretium fermentum quam sit amet
-                cursus ante sollicitudin velen fermen morbinetion consesua the
-                risus consequation the porttiton.
-              </p>
+              <p className="text-sm">{carData?.description}</p>
               <div className="my-10 flex flex-col gap-3">
                 <p className="flex justify-start items-center gap-3">
                   <FaCheck className="bg-filterColor rounded-full size-8 p-2 text-secondary shadow-2xl" />
@@ -45,11 +41,39 @@ const CarDetails = () => {
                   Rent Now Pay When You Arrive
                 </p>
               </div>
+
+              {/* gallery section  */}
+              <div>
+                <p className="font-bold text-lg sm:text-2xl my-3">
+                  Image Gallery
+                </p>
+                <div className="grid grid-cols-2 lg:grid-cols-3 items-center gap-2 my-7">
+                  {carData?.images?.map((item) => (
+                    <div className="relative overflow-hidden rounded-2xl">
+                      <img
+                        src={item}
+                        alt="car image"
+                        className="object-cover rounded-2xl transition-transform duration-700 ease-in-out transform hover:scale-110 cursor-pointer block"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* car faqs   */}
+              <div className="my-16">
+                <p className="font-bold text-lg sm:text-2xl mb-10">
+                  Rental Conditions
+                </p>
+                <div>
+                  <Faqs faqData={carData?.faqs } />
+                </div>
+              </div>
             </div>
 
             {/* Booking Info */}
             <div className="col-span-12 md:col-span-5 p-4  md:-mt-28 opacity-90">
-              <BookingForm />
+              <BookingForm carData={carData as Partial<TCar>} />
             </div>
           </div>
         </Container>
@@ -60,7 +84,7 @@ const CarDetails = () => {
 
 export default CarDetails;
 
-const dummyData = {
+const carData = {
   _id: "66d4aefec8e2acb52b10846d",
   name: "Toyota Camry 23",
   category: "Luxury",
@@ -81,7 +105,9 @@ const dummyData = {
   features: ["Leather seats", "Sunroof", "Bluetooth connectivity"],
   safetyFeatures: ["Anti-lock braking system", "Airbags", "Rearview camera"],
   images: [
-    "https://res.cloudinary.com/dgm9w4vwh/image/upload/v1725214459/image_1725214457904.jpg",
+    "https://i.ibb.co.com/Lxd4LDk/kahl-orr-N10-NDz-CQo-DU-unsplash.jpg",
+    "https://i.ibb.co.com/s3DwDGj/kahl-orr-7-OLAc-GJf-Fok-unsplash.jpg",
+    "https://i.ibb.co.com/qBScxTB/kahl-orr-Zd-LFPE0-AZBU-unsplash.jpg",
   ],
   faqs: [
     {

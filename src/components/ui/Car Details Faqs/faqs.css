@@ -1,0 +1,40 @@
+.custom-collapse .ant-collapse-item {
+  background-color: #424242; /* Default dark background */
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.custom-collapse .ant-collapse-header {
+  background-color: #2b2a2a; /* Initially black */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+  padding: 12px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-collapse .ant-collapse-item-active .ant-collapse-header {
+  background-color: #ffb84b; /* Change to gold when active */
+  color: #000;
+}
+
+.custom-collapse .ant-collapse-content {
+  background-color: #333; /* Dark content area */
+  border-radius: 0 0 10px 10px;
+}
+
+.custom-collapse .ant-collapse-content-box {
+  color: #fff;
+  padding: 16px;
+}
+
+.custom-collapse .ant-collapse-arrow {
+  color: #fff;
+}
+
+.custom-collapse .ant-collapse-item-active .ant-collapse-arrow {
+  color: white; /* Arrow color when active */
+}
+.ant-collapse-header-text{
+    color: white;
+}

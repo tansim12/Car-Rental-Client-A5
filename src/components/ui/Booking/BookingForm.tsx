@@ -11,8 +11,8 @@ import { bookingSchema } from "../../../Schemas/bookingSchema";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { calculateDaysDifference } from "../../../utils/calculateDaysDifference";
-
-const BookingForm = () => {
+import { TCar } from "../../../Types/car.types";
+const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
   const pickUpLocOptions = carAvailableAreaArray?.map((item) => ({
     label: item,
     value: item,
@@ -49,7 +49,10 @@ const BookingForm = () => {
     <div className="">
       <div className="bg-secondary flex justify-center items-center h-20 rounded-t-3xl">
         <p className="">
-          <span className="text-2xl font-bold">$500</span> / rent per day
+          <span className="text-2xl font-bold inline-block">
+            {carData?.rentalPricePerDay} ৳
+          </span>{" "}
+          / rent per day
         </p>
       </div>
 
@@ -87,26 +90,32 @@ const BookingForm = () => {
             </div>
 
             <div className=" p-4 rounded-lg shadow-lg">
-  <div className="text-white my-4">
-    <p className="text-sm flex justify-center items-center">
-      Total Booking Duration: <span className="font-bold ml-2">{totalDayDiffer} days</span>
-    </p>
-    <p className="text-sm flex justify-center items-center">
-      Per Day Cost: <span className="font-bold ml-2">$600</span>
-    </p>
-    <p className="text-secondary text-xl font-bold mt-4 flex justify-center items-center">
-      Total Cost: <span className="ml-2">${600 * totalDayDiffer}</span>
-    </p>
-  </div>
-  <CustomOutlineButton
-    icon={IoCheckmarkDone}
-    isTransParent={false}
-    name="Confirm"
-    customCss="w-full py-5"
-    textColor="black"
-  />
-</div>
-
+              <div className="text-white my-4">
+                <p className="text-sm flex justify-center items-center">
+                  Total Booking Duration:{" "}
+                  <span className="font-bold ml-2">{totalDayDiffer} days</span>
+                </p>
+                <p className="text-sm flex justify-center items-center">
+                  Per Day Cost:{" "}
+                  <span className="font-bold ml-2">
+                    {carData?.rentalPricePerDay} ৳
+                  </span>
+                </p>
+                <p className="text-secondary text-xl font-bold mt-4 flex justify-center items-center">
+                  Total Cost:{" "}
+                  <span className="ml-2">
+                    {(carData?.rentalPricePerDay as number) * totalDayDiffer} ৳
+                  </span>
+                </p>
+              </div>
+              <CustomOutlineButton
+                icon={IoCheckmarkDone}
+                isTransParent={false}
+                name="Confirm"
+                customCss="w-full py-5"
+                textColor="black"
+              />
+            </div>
           </CustomForm>
         </div>
       </div>
