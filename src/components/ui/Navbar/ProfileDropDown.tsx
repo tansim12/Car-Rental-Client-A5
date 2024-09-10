@@ -9,9 +9,10 @@ import toast from "react-hot-toast";
 
 type ProfileDropDownProps = {
   userData: Partial<TUser>;
+  customCss?: string;
 };
 
-const ProfileDropDown = ({ userData }: ProfileDropDownProps) => {
+const ProfileDropDown = ({ userData, customCss }: ProfileDropDownProps) => {
   const dispatch = useDispatch();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -42,7 +43,9 @@ const ProfileDropDown = ({ userData }: ProfileDropDownProps) => {
       onMouseLeave={handleMouseLeave}
     >
       {/* Profile section */}
-      <div className="md:border-r md:pr-5 cursor-pointer">
+      <div
+        className={`${customCss} cursor-pointer  flex flex-col justify-items-start items-center`}
+      >
         <CgProfile size={36} />
         <p>{userData?.name ? userData?.name.slice(0, 7) : ""}</p>
       </div>

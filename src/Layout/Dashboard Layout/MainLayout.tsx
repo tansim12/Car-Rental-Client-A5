@@ -1,34 +1,30 @@
 import React from "react";
-import { Button, Layout, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../Redux/hook";
-import toast from "react-hot-toast";
-import { logout } from "../../Redux/Feature/Auth/authSlice";
-import Sidebar from "./Sidebar";
+import {  Layout, theme } from "antd";
+import { Outlet } from "react-router-dom";
 
+import Sidebar from "./Sidebar";
+import DashboardNavbar from "../../components/ui/Dashboard/DashboardNavbar";
 
 const { Header, Content } = Layout;
 const MainLayout: React.FC = () => {
-  const navigate = useNavigate();
+
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const dispatch = useAppDispatch();
 
-  const handleLogOut = async () => {
-    const toastId = toast.loading("Logout pending");
-    dispatch(logout());
 
-    toast.success("Logout Successfully done", { id: toastId, duration: 2000 });
-    navigate("/login");
-  };
 
   return (
     <Layout className="h-full">
       <Sidebar />
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button onClick={handleLogOut}>Log Out</Button>
+        <Header style={{ padding: 0, background: "white" }}>
+          {/* DashboardNavbar  */}
+          <div>
+            <DashboardNavbar />
+          </div>
+       
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
@@ -48,4 +44,3 @@ const MainLayout: React.FC = () => {
 };
 
 export default MainLayout;
-
