@@ -77,8 +77,8 @@ const CustomDynamicDoubleInput = ({
         </div>
       ))}
 
-      <Button type="link" onClick={() => append({ question: "", answer: "" })}>
-        + Add FAQ
+      <Button type="link" onClick={() => append({ question: "", answer: "" })} className="-mt-32">
+        + Add {name}
       </Button>
     </div>
   );

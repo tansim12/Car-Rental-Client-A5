@@ -27,8 +27,6 @@ const CustomSelectWithWatch = ({
     control,
     name,
   });
-console.log(inputValue);
-
   useEffect(() => {
     changeOnValue(inputValue);
   }, [ inputValue]);

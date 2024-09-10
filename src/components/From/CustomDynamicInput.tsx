@@ -38,7 +38,7 @@ const CustomDynamicInput = ({
             rules={{ required: `${name} is required` }}
             render={({ field, fieldState: { error } }) => (
               <Form.Item
-                label={label}
+                label={`${label} ${index + 1}`}
                 validateStatus={error ? "error" : ""}
                 help={error?.message}
                 className="w-full"
