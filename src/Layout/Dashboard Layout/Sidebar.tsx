@@ -9,15 +9,16 @@ import useAuthUserInfo from "../../hooks/useAuthUserInfo";
 import { adminPath } from "../../routes/route.admin";
 import generateRoutesNavLinks from "../../utils/generateRoutesNavLinks";
 import { userPath } from "../../routes/route.user";
+import logo from '../../assets/Image/logo.png';
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const { token,  } = useAuthUserInfo();
-
+const navigate = useNavigate()
   let userData;
   if (token) {
     userData = verifyToken(token);
   }
   const user = userData?.data;
-console.log(user?.role);
 
   const userRole = {
     ADMIN: "admin",
@@ -51,10 +52,16 @@ console.log(user?.role);
         console.log(collapsed, type);
       }}
     >
-      <div className="flex justify-center items-center  ">
-        <div className="bg-white rounded-full size-20 flex justify-center items-center   font-extrabold  my-auto">
-          PH-UNI
-        </div>
+      <div className="flex justify-center items-center m-5 ">
+        {/* logo div  */}
+        <div className="">
+              <img
+                onClick={() => navigate("/")}
+                src={logo}
+                alt="logo"
+                className="w-fit h-6 cursor-pointer"
+              />
+            </div>
       </div>
       <Menu
         theme="dark"
