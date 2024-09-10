@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, } from "react-hook-form";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../../components/From/CustomForm";
 import CustomInput from "../../../components/From/CustomInput";
 import CustomSelect from "../../../components/From/CustomSelect";
@@ -9,6 +9,7 @@ import {
 } from "../../../utils/Options/carOptions";
 import CustomDynamicInput from "../../../components/From/CustomDynamicInput";
 import { Button } from "antd";
+import CustomDynamicDoubleInput from "../../../components/From/CustomDynamicDoubleInput";
 
 const CreateCar = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -60,19 +61,28 @@ const CreateCar = () => {
               name="availableAreas"
               label="Available Areas"
               options={availableAreaOptions}
+              placeholder="Available Areas"
             />
 
             <CustomDynamicInput
-            //   control={control}
-              name="features"
-              label="Features"
+              name="safetyFeatures"
+              label="Safety Features"
               type="text"
-            //   isLabelColor={true}
+            />
+            <CustomDynamicInput name="features" label="Features" type="text" />
+          </div>
+
+          <div>
+            <CustomDynamicDoubleInput
+              name="faqs"
+              label="Faqs"
+              type="text"
+              option={["question", "answer",]}
+              
             />
           </div>
 
-
-          <Button htmlType="submit" >Submit</Button>
+          <Button htmlType="submit">Submit</Button>
         </CustomForm>
       </div>
     </div>

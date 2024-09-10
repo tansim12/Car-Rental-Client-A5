@@ -19,7 +19,7 @@ const CustomInput = ({
 }: TInputProps) => {
   return (
     <div
-      style={{ marginBottom: "20px" }}
+      style={{ marginBottom: "10px" }}
       className={`${isLabelColor && "custom-label"}`}
     >
       <Controller

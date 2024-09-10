@@ -32,7 +32,7 @@ const CustomDynamicInput = ({
   return (
     <div className={`${isLabelColor ? "custom-label" : ""}`}>
       {fields.map((field, index) => (
-        <div key={field.id} className="flex items-center -mb-4">
+        <div key={field.id} className="flex items-center -mb-3">
           <Controller
             name={`${name}.${index}`} // Dynamic name for each color input
             rules={{ required: `${name} is required` }}
