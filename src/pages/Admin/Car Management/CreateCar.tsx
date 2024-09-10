@@ -13,16 +13,45 @@ import CustomDynamicDoubleInput from "../../../components/From/CustomDynamicDoub
 import CustomReactQuill from "../../../components/From/CustomReactQuill";
 import CustomFileUpload from "../../../components/From/CustomFileUpload";
 import { useState } from "react";
-
+import toast from "react-hot-toast";
+import { useCreateCarMutation } from "../../../Redux/Feature/Admin/carManagement.api";
+import { handleApiError } from "../../../utils/handleApiError";
 
 const CreateCar = () => {
-  const [selectImages, setSelectImages] = useState(null);
+  const [selectImages, setSelectImages] = useState([]);
+  const [createStudent] = useCreateCarMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
-    console.log(selectImages);
-    
-  };
+    const payload = {
+      ...data,
+      seatingCapacity: Number(data?.seatingCapacity),
+      numberOfDoors: Number(data?.numberOfDoors),
+      advance: Number(data?.advance),
+      rentalPricePerDay: Number(data?.rentalPricePerDay),
+      mileage: Number(data?.mileage),
+    };
 
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(payload));
+    if (selectImages && selectImages?.length > 0) {
+      for (let i = 0; i < selectImages?.length; i++) {
+        formData.append("file", selectImages[i]);
+      }
+    }
+
+    const toastId = toast.loading("Creating");
+    try {
+      const res = await createStudent(formData).unwrap();
+      if (res?.success) {
+        toast.success("Car Create Successfully done", {
+          id: toastId,
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      handleApiError(error, toastId);
+    }
+  };
 
   return (
     <div>
@@ -60,14 +89,14 @@ const CreateCar = () => {
               type="number"
             />
 
-         <div className="flex justify-center items-center gap-4">
-         <CustomInput
-              name="rentalPricePerDay"
-              label="Price PerDay"
-              type="number"
-            />
-            <CustomInput name="advance" label="Advance" type="number" />
-         </div>
+            <div className="flex justify-center items-center gap-4">
+              <CustomInput
+                name="rentalPricePerDay"
+                label="Price PerDay"
+                type="number"
+              />
+              <CustomInput name="advance" label="Advance" type="number" />
+            </div>
             <CustomSelect
               mode="multiple"
               name="availableAreas"
@@ -116,7 +145,6 @@ const CreateCar = () => {
 
 export default CreateCar;
 const carData = {
-  _id: "66d4aefec8e2acb52b10846d",
   name: "Toyota Camry 23",
   category: "Luxury",
   brand: "Toyota",
@@ -135,11 +163,6 @@ const carData = {
   seatingCapacity: 5,
   features: ["Leather seats", "Sunroof", "Bluetooth connectivity"],
   safetyFeatures: ["Anti-lock braking system", "Airbags", "Rearview camera"],
-  images: [
-    "https://i.ibb.co.com/Lxd4LDk/kahl-orr-N10-NDz-CQo-DU-unsplash.jpg",
-    "https://i.ibb.co.com/s3DwDGj/kahl-orr-7-OLAc-GJf-Fok-unsplash.jpg",
-    "https://i.ibb.co.com/qBScxTB/kahl-orr-Zd-LFPE0-AZBU-unsplash.jpg",
-  ],
   faqs: [
     {
       question: "What is the fuel efficiency of the car?",
