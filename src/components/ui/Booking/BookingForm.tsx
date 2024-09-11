@@ -136,6 +136,7 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
                 name="Confirm"
                 customCss="w-full py-5"
                 textColor="black"
+                disabled={carData?.availability !== "available" }
               />
             </div>
           </CustomForm>

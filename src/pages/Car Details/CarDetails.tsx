@@ -8,6 +8,7 @@ import { useGetSingleCarQuery } from "../../Redux/Feature/Admin/carManagement.ap
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingPage from "../Loading/LoadingPage";
+import { Tag } from "antd";
 const CarDetails = () => {
   const [carData, setCarData] = useState<Partial<TCar>>({});
   const { id } = useParams();
@@ -45,7 +46,12 @@ const CarDetails = () => {
                 <p className="font-bold text-lg sm:text-2xl my-3">
                   General Information
                 </p>
-                <p className="text-sm">{carData?.description}</p>
+                <p
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{
+                    __html: carData?.description || "",
+                  }}
+                ></p>
                 <div className="my-10 flex flex-col gap-3">
                   <p className="flex justify-start items-center gap-3">
                     <FaCheck className="bg-filterColor rounded-full size-8 p-2 text-secondary shadow-2xl" />
@@ -88,6 +94,14 @@ const CarDetails = () => {
 
                 <div className="my-10">
                   <ul className="list-disc pl-5 grid grid-cols-3">
+                    <li className="custom-bullet">
+                      Available:{" "}
+                      {carData?.availability === "available" ? (
+                        <Tag color="green">{carData?.availability}</Tag>
+                      ) : (
+                        <Tag color="red">{carData?.availability}</Tag>
+                      )}
+                    </li>
                     <li className="custom-bullet">
                       Category: {carData?.category}
                     </li>

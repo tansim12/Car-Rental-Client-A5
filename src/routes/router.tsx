@@ -10,6 +10,7 @@ import { adminRoutes } from "./route.admin";
 import MainLayout from "../Layout/Dashboard Layout/MainLayout";
 import PrivateRoute from "./PrivateRoute";
 import { userRoutes } from "./route.user";
+import AboutUs from "../pages/About/AboutUs";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: "listing",
         element: <CarListing />,
+      },
+      {
+        path: "about",
+        element: <AboutUs />,
       },
       {
         path: "car-details/:id",
