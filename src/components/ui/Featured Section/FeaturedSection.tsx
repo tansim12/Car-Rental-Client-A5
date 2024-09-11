@@ -119,7 +119,7 @@ const FeaturedSection: React.FC = () => {
                               {/* Bags Icon */}
                               <span className="flex items-center">
                                 <FaSuitcase className="mr-1" /> {car?.category}{" "}
-                                Bags
+                               
                               </span>
                             </div>
                           </div>
@@ -135,7 +135,7 @@ const FeaturedSection: React.FC = () => {
                           </button>
                           <div className="text-secondary ">
                             <span className="font-semibold md:font-bold text-sm md:text-lg">
-                              ${car?.rentalPricePerDay}
+                              {car?.rentalPricePerDay}<span className="tex-lg">৳</span>
                             </span>{" "}
                             <br />
                             <span className="text-sm text-gray-400">/day</span>

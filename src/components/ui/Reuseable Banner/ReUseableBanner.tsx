@@ -2,7 +2,7 @@
 type TReUseableBannerProps = {
   title: string;
   subTitle: string;
-  image:any
+  image: any;
 };
 
 const ReUseableBanner = ({ title, subTitle, image }: TReUseableBannerProps) => {
@@ -10,7 +10,11 @@ const ReUseableBanner = ({ title, subTitle, image }: TReUseableBannerProps) => {
     <div className="relative h-[70vh]">
       {/* Background Image */}
       <img
-        src={image}
+        src={
+          image
+            ? image
+            : "https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/2.jpg"
+        }
         alt="Background"
         className="h-[70vh] w-full object-cover absolute top-0 left-0 opacity-35"
       />
