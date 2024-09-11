@@ -16,12 +16,7 @@ export type TResponseError = {
   };
 };
 export type TResponse<T> = {
-  data?:
-    | T
-    | {
-        result: T;
-        meta: TMeta;
-      };
+  data?: T;
   meta?: TMeta;
   error?: TResponseError;
   success?: boolean;

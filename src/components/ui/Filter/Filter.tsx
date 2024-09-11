@@ -69,6 +69,14 @@ const Filter = ({
 
     const form = e.target as HTMLFormElement;
     const searchValue = form.search.value; // Accessing the input named 'search'
+    if (searchValue) {
+      if (setParams) {
+        setParams((prev: any) => {
+          const newPrev = prev?.filter((item: { name: string; }) => item?.name !== "searchTerm");
+          return [...newPrev, { name: "searchTerm", value: searchValue }];
+        });
+      }
+    }
   };
   return (
     <div className=" shadow-2xl   text-white ">

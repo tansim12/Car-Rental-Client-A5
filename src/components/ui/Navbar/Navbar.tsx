@@ -83,7 +83,7 @@ const Navbar = () => {
 
             {/* small device menu div  */}
             <div className="visible md:hidden">
-              <MenuDrawer />
+              <MenuDrawer userData={userData as Partial<TUser>} id={id as string} />
             </div>
           </div>
         </div>

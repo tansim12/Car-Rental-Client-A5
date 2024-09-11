@@ -32,7 +32,7 @@ const FilterDrawer = ({
       </Space>
 
       <Drawer
-        title="Navbar"
+        title="Filter"
         autoFocus={false}
         closeIcon={<IoMdClose className="text-white" />}
         placement={"left"}

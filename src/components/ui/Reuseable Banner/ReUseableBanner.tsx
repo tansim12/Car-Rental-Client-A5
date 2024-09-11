@@ -20,7 +20,7 @@ const ReUseableBanner = ({ title, subTitle, image }: TReUseableBannerProps) => {
       />
 
       {/* Text and Button */}
-      <div className="absolute z-10 w-full h-[70vh] flex flex-col justify-center items-center text-center">
+      <div className="absolute z-90 w-full h-[70vh] flex flex-col justify-center items-center text-center">
         <p className="text-secondary text-lg italic">{subTitle}</p>
         <p className="text-3xl md:text-5xl text-white font-serif font-extrabold my-3">
           {title}
