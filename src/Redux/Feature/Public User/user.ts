@@ -1,3 +1,4 @@
+import { TQueryParams } from "../../../Types/car.types";
 import { TReduxResponse } from "../../../Types/response.type";
 import { TUser } from "../../../Types/user.type";
 import { baseApi } from "../../api/baseApi";
@@ -15,7 +16,24 @@ const userApi = baseApi.injectEndpoints({
         return response?.data;
       },
     }),
+
+    getAllCarsByUser: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/cars",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["AllCars"],
+    }),
   }),
 });
 
-export const { useGetUserInfoQuery } = userApi;
+export const { useGetUserInfoQuery, useGetAllCarsByUserQuery } = userApi;

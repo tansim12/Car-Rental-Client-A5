@@ -3,9 +3,10 @@ import car from "../../../assets/Videos/car.mp4";
 import { BiCurrentLocation } from "react-icons/bi";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import CustomButton from "../Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 const HomePageSlider: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
-
+  const navigate = useNavigate();
   const handleVideoLoaded = () => {
     setVideoLoaded(true); // Show video when it's loaded
   };
@@ -47,7 +48,7 @@ const HomePageSlider: React.FC = () => {
         </p>
         {/* Button */}
         <div className="flex justify-center items-center gap-3 mt-5">
-          <div>
+          <div onClick={() => navigate("/listing")}>
             <CustomButton
               name="Book Now"
               isTransParent={false}
