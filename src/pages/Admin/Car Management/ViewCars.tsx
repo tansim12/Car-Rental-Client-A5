@@ -12,10 +12,12 @@ import CustomPagination from "../../../components/ui/Pagination/CustomPagination
 import customPaginationFn from "../../../utils/customPaginationFn";
 import { handleApiError } from "../../../utils/handleApiError";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export type TTableData = Partial<TCar>;
 
 const ViewCars: React.FC = () => {
+  const navigate = useNavigate();
   const [params, setParams] = useState<TQueryParams[]>([]);
   const { data: allCarData, isFetching: carDataLoading } =
     useGetAllCarsByAdminQuery([
@@ -184,7 +186,9 @@ const ViewCars: React.FC = () => {
   ];
 
   const handleEdit = (id: string) => {
-    console.log("Editing record:", id);
+    if (id) {
+      navigate(`/admin/update-car/${id}`);
+    }
     // Open a modal or navigate to the edit page
   };
 
@@ -206,7 +210,7 @@ const ViewCars: React.FC = () => {
           };
           const res = await updateCar(payload).unwrap();
           if (res?.success) {
-            toast.success("Car Create Successfully done", {
+            toast.success("Car Delete Successfully done", {
               id: toastId,
               duration: 3000,
             });

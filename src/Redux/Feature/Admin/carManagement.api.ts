@@ -20,6 +20,15 @@ const carManagementApi = baseApi.injectEndpoints({
       },
       providesTags: ["AllCars"],
     }),
+    getSingleCar: builder.query({
+      query: (id) => {
+        return {
+          url: `/cars/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["SingleCar"],
+    }),
 
     createCar: builder.mutation({
       query: (body) => ({
@@ -34,6 +43,8 @@ const carManagementApi = baseApi.injectEndpoints({
         // Append the JSON data to FormData as a string
         formData.append("data", JSON.stringify(body));
         // Append the file to FormData if it exists
+        console.log(file);
+        
         if (file) {
           for (let i = 0; i < file?.length; i++) {
             formData.append("file", file[i]);
@@ -45,7 +56,7 @@ const carManagementApi = baseApi.injectEndpoints({
           body: formData, // Send FormData
         };
       },
-      invalidatesTags: ["AllCars"],
+      invalidatesTags: ["AllCars", "SingleCar"],
     }),
   }),
 });
@@ -54,4 +65,5 @@ export const {
   useCreateCarMutation,
   useGetAllCarsByAdminQuery,
   useUpdateCarMutation,
+  useGetSingleCarQuery,
 } = carManagementApi;

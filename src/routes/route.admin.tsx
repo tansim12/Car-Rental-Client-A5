@@ -38,7 +38,7 @@ export const adminPath: IAccRoutes[] = [
         element: <ViewCars />,
       },
       {
-        path: "update-car",
+        path: "update-car/:id",
         element: <UpdateCar />,
       },
     ],
