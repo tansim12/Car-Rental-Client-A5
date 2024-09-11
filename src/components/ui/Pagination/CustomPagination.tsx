@@ -7,12 +7,14 @@ type TCustomPaginationProps = {
   total: number;
   handlePagination: any;
   isCustomPagination?: boolean;
+  limit?:number
 };
 
 const CustomPagination = ({
   total,
   handlePagination,
-  isCustomPagination=true
+  isCustomPagination=true,
+  limit
 }: TCustomPaginationProps) => {
   return (
     <div className={`${isCustomPagination ? "custom-pagination": ""}`}>
@@ -22,6 +24,7 @@ const CustomPagination = ({
         defaultCurrent={1}
         total={total}
         onChange={handlePagination}
+        pageSize={limit && limit}
       />
     </div>
   );

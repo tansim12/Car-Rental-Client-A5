@@ -1,19 +1,29 @@
-import { PaginationProps } from "antd";
 import CarCard from "../../components/ui/Car Card/CarCard";
 import Container from "../../components/ui/Container";
 import Filter from "../../components/ui/Filter/Filter";
 import FilterDrawer from "../../components/ui/Filter/FilterDrawer";
 import CustomPagination from "../../components/ui/Pagination/CustomPagination";
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
+import { useGetAllCarsByUserQuery } from "../../Redux/Feature/Public User/user";
+import { TCar, TQueryParams } from "../../Types/car.types";
+import { useState } from "react";
+import customPaginationFn from "../../utils/customPaginationFn";
+import LoadingPage from "../Loading/LoadingPage";
 
 const CarListing = () => {
-    const handlePagination: PaginationProps["onChange"] = (
-    pageNumber,
-    pageSize
-  ) => {
-    console.log(pageNumber, pageSize);
-    // setParams([{ name: "page", value: pageNumber }, ...params]);
-  };
+  const [params, setParams] = useState<TQueryParams[]>([]);
+  const { data, isFetching } = useGetAllCarsByUserQuery([
+    { name: "sort", value: "-createdAt" },
+    { name: "limit", value:6 },
+    {
+      name: "fields",
+      value:
+        "_id name images seatingCapacity numberOfDoors rentalPricePerDay mileage type category availableAreas",
+    },
+    ...params,
+  ]);
+
+  const handlePagination = customPaginationFn(setParams);
   return (
     <div>
       <div className="">
@@ -25,27 +35,40 @@ const CarListing = () => {
       </div>
 
       <Container>
-        <div className="flex justify-between  gap-5">
+        <div className="flex justify-center lg:justify-between  gap-5 ">
           {/* filter div  */}
           <div className="hidden md:block -mt-[113px] opacity-90">
-            <Filter />
+            <Filter setParams={setParams} />
           </div>
           <div className="visible md:hidden mt-4 absolute">
             <FilterDrawer />
           </div>
           {/* car show div  */}
           <div className="text-white text-lg mt-20">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-              <CarCard />
-              <CarCard />
-              <CarCard />
-              <CarCard />
-            </div>
+            {!isFetching ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 justify-center items-center">
+                {data?.data?.result.length ? (
+                  data?.data?.result?.map((item: Partial<TCar>) => (
+                    <CarCard key={item?._id} item={item} />
+                  ))
+                ) : (
+                  <span className="text-5xl text-red-500 w-full justify-center items-center">
+                    There is no data 😥😥{" "}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <LoadingPage />
+            )}
           </div>
         </div>
         {/* pagination div  */}
         <div className="flex justify-center items-center my-20">
-          <CustomPagination  total={100} handlePagination={handlePagination} />
+          <CustomPagination
+            total={data?.data?.meta?.total}
+            limit={6}
+            handlePagination={handlePagination}
+          />
         </div>
       </Container>
     </div>

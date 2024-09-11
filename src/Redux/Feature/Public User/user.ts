@@ -16,15 +16,35 @@ const userApi = baseApi.injectEndpoints({
         return response?.data;
       },
     }),
+    createBooking: builder.mutation({
+      query: (body) => ({
+        url: "/bookings",
+        method: "POST",
+        body: body,
+      }),
+    }),
 
     getAllCarsByUser: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
+    
+        // Group args by `name`
+        const groupedArgs: Record<string, string[]> = {};
+    
         if (args) {
           args.forEach((item: TQueryParams) => {
-            params.append(item.name, item.value as string);
+            if (!groupedArgs[item.name]) {
+              groupedArgs[item.name] = [];
+            }
+            groupedArgs[item.name].push(item.value as string);
           });
         }
+    
+        // Append the grouped values for each `name`
+        Object.keys(groupedArgs).forEach((name) => {
+          params.append(name, groupedArgs[name].join(' '));
+        });
+    
         return {
           url: "/cars",
           method: "GET",
@@ -33,13 +53,7 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["AllCars"],
     }),
-    createBooking: builder.mutation({
-      query: (body) => ({
-        url: "/bookings",
-        method: "POST",
-        body: body,
-      }),
-    }),
+    
   }),
 });
 

@@ -11,6 +11,7 @@ import {
 type TFormConfig = {
   defaultValues?: Record<string, any>;
   resolver?: any;
+  isReset?: boolean;
 };
 
 type TFormProps = {
@@ -19,6 +20,7 @@ type TFormProps = {
 } & TFormConfig;
 
 const CustomForm = ({
+  isReset = true,
   onSubmit,
   children,
   defaultValues,
@@ -38,7 +40,9 @@ const CustomForm = ({
 
   const submit: SubmitHandler<FieldValues> = (data) => {
     onSubmit(data);
-    methods.reset();
+    if (isReset) {
+      methods.reset();
+    }
   };
 
   return (

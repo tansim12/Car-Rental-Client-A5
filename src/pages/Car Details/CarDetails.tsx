@@ -77,6 +77,14 @@ const CarDetails = () => {
                     ))}
                   </span>
                 </div>
+                <div className="text-lg my-4">
+                  <span className="text-secondary">Available Area :</span>{" "}
+                  <span>
+                    {carData?.availableAreas?.map((i) => (
+                      <span key={i}>{i}, </span>
+                    ))}
+                  </span>
+                </div>
 
                 <div className="my-10">
                   <ul className="list-disc pl-5 grid grid-cols-3">

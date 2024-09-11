@@ -12,6 +12,7 @@ import {
   availableAreaOptions,
   categoryOptions,
 } from "../../../utils/Options/carOptions";
+import { TQueryParams } from "../../../Types/car.types";
 
 interface FilterForm {
   availability?: string;
@@ -19,15 +20,46 @@ interface FilterForm {
   availableAreas?: string[];
 }
 
-const Filter: React.FC = ({ setQueryObj }: any) => {
+const Filter= ({
+  setParams,
+}: {
+  setParams: React.Dispatch<React.SetStateAction<TQueryParams[]>>;
+}) => {
   const [isFiltersSelected, setIsFiltersSelected] = useState([]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FilterForm) => {
-    console.log(data);
+    const newPayload: Record<string, any> = {}; // Initialize as an empty object
 
-    // if (setQueryObj) {
-    //   setQueryObj((prev) => ({ ...prev, ...data }));
-    // }
+    if (data?.availability) {
+      newPayload.availability = data.availability; // Assign availability if it exists
+      if (setParams) {
+        setParams((prev: any) => [
+          ...prev,
+          { name: "availability", value: newPayload?.availability },
+        ]);
+      }
+    }
+
+    if (data?.category?.length) {
+      newPayload.category = data.category.join(" "); // Join category array into a string if it has elements
+      if (setParams) {
+        setParams((prev: any) => [
+          ...prev,
+
+          { name: "category", value: newPayload?.category },
+        ]);
+      }
+    }
+
+    if (data?.availableAreas?.length) {
+      newPayload.availableAreas = data.availableAreas.join(" "); // Join availableAreas array into a string if it has elements
+      if (setParams) {
+        setParams((prev: any) => [
+          ...prev,
+          { name: "availableAreas", value: newPayload?.availableAreas },
+        ]);
+      }
+    }
   };
 
   // handleSearch
@@ -47,7 +79,7 @@ const Filter: React.FC = ({ setQueryObj }: any) => {
   return (
     <div className=" shadow-2xl   text-white ">
       {/* search section  */}
-      <div className="h-24 bg-secondary rounded-t-xl flex justify-center items-center w-full">
+      <div className="h-24 bg-secondary rounded-t-xl flex justify-center items-center w-full" style={{zIndex:"999px"}}>
         <form onSubmit={handleSearch} className="relative">
           <input
             type="text"
@@ -65,7 +97,7 @@ const Filter: React.FC = ({ setQueryObj }: any) => {
       </div>
 
       <div className="bg-filterColor px-5 rounded-b-3xl p-3 ">
-        <CustomForm onSubmit={onSubmit}>
+        <CustomForm onSubmit={onSubmit} isReset={false}>
           <div className="w-56">
             <CustomCollapse
               label="Availability"
