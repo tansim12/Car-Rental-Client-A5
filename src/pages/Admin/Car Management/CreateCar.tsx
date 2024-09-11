@@ -8,7 +8,6 @@ import {
   typesOptions,
 } from "../../../utils/Options/carOptions";
 import CustomDynamicInput from "../../../components/From/CustomDynamicInput";
-import { Button } from "antd";
 import CustomDynamicDoubleInput from "../../../components/From/CustomDynamicDoubleInput";
 import CustomReactQuill from "../../../components/From/CustomReactQuill";
 import CustomFileUpload from "../../../components/From/CustomFileUpload";
@@ -16,10 +15,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useCreateCarMutation } from "../../../Redux/Feature/Admin/carManagement.api";
 import { handleApiError } from "../../../utils/handleApiError";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { carZodValidation } from "../../../Schemas/carSchema";
+import ButtonBackgroundShine from "../../../components/ui/Button/ButtonBackgroundShine";
 
 const CreateCar = () => {
   const [selectImages, setSelectImages] = useState([]);
-  const [createStudent] = useCreateCarMutation();
+  const [createStudent, {isLoading}] = useCreateCarMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
     const payload = {
@@ -59,7 +61,11 @@ const CreateCar = () => {
         <p className="text-center text-black text-xl"> CreateCar</p>
       </div>
       <div className="my-4">
-        <CustomForm onSubmit={onSubmit} defaultValues={carData}>
+        <CustomForm
+          onSubmit={onSubmit}
+          defaultValues={carData}
+          resolver={zodResolver(carZodValidation.createCarZodSchema)}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 ">
             <CustomInput name="name" label="Name" type="text" />
             <CustomSelect
@@ -136,7 +142,8 @@ const CreateCar = () => {
               />
             </div>
           </div>
-          <Button htmlType="submit">Submit</Button>
+
+          <ButtonBackgroundShine name="Create Car" customCss="w-[30%]" isLoading={isLoading} />
         </CustomForm>
       </div>
     </div>
