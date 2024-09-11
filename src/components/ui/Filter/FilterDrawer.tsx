@@ -3,9 +3,13 @@ import { Button, Drawer, Space } from "antd";
 import { IoMdClose } from "react-icons/io";
 import { FaFilter } from "react-icons/fa";
 import Filter from "./Filter";
+import { TQueryParams } from "../../../Types/car.types";
 
-
-const FilterDrawer: React.FC = () => {
+const FilterDrawer = ({
+  setParams,
+}: {
+  setParams: React.Dispatch<React.SetStateAction<TQueryParams[]>>;
+}) => {
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -19,8 +23,11 @@ const FilterDrawer: React.FC = () => {
   return (
     <>
       <Space>
-        <Button  className="bg-secondary border-none text-xl" onClick={showDrawer}>
-        <FaFilter /> Filter
+        <Button
+          className="bg-secondary border-none text-xl"
+          onClick={showDrawer}
+        >
+          <FaFilter /> Filter
         </Button>
       </Space>
 
@@ -37,7 +44,7 @@ const FilterDrawer: React.FC = () => {
         bodyStyle={{ backgroundColor: "#1b1b1b" }} // Ensure the body of the drawer is black as well
       >
         <div className="">
-          <Filter />
+          <Filter setParams={setParams} />
         </div>
       </Drawer>
     </>

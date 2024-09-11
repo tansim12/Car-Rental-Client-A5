@@ -20,7 +20,7 @@ interface FilterForm {
   availableAreas?: string[];
 }
 
-const Filter= ({
+const Filter = ({
   setParams,
 }: {
   setParams: React.Dispatch<React.SetStateAction<TQueryParams[]>>;
@@ -69,17 +69,14 @@ const Filter= ({
 
     const form = e.target as HTMLFormElement;
     const searchValue = form.search.value; // Accessing the input named 'search'
-
-    console.log(searchValue); // This will now log the value of the search input
-
-    // if (setQueryObj) {
-    //   setQueryObj((prev: any) => ({ ...prev, search: searchValue }));
-    // }
   };
   return (
     <div className=" shadow-2xl   text-white ">
       {/* search section  */}
-      <div className="h-24 bg-secondary rounded-t-xl flex justify-center items-center w-full" style={{zIndex:"999px"}}>
+      <div
+        className="h-24 bg-secondary rounded-t-xl flex justify-center items-center w-full"
+        style={{ zIndex: "999px" }}
+      >
         <form onSubmit={handleSearch} className="relative">
           <input
             type="text"
@@ -98,7 +95,7 @@ const Filter= ({
 
       <div className="bg-filterColor px-5 rounded-b-3xl p-3 ">
         <CustomForm onSubmit={onSubmit} isReset={false}>
-          <div className="w-56">
+          <div className="">
             <CustomCollapse
               label="Availability"
               name="availability"

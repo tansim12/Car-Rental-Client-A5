@@ -14,7 +14,6 @@ const CarListing = () => {
   const [params, setParams] = useState<TQueryParams[]>([]);
   const { data, isFetching } = useGetAllCarsByUserQuery([
     { name: "sort", value: "-createdAt" },
-    { name: "limit", value:6 },
     {
       name: "fields",
       value:
@@ -35,16 +34,16 @@ const CarListing = () => {
       </div>
 
       <Container>
-        <div className="flex justify-center lg:justify-between  gap-5 ">
+        <div className="grid grid-cols-12 justify-center lg:justify-between  gap-5 ">
           {/* filter div  */}
-          <div className="hidden md:block -mt-[113px] opacity-90">
+          <div className="hidden md:block -mt-[113px] opacity-90 col-span-3">
             <Filter setParams={setParams} />
           </div>
-          <div className="visible md:hidden mt-4 absolute">
-            <FilterDrawer />
+          <div className="visible md:hidden mt-4 absolute ">
+            <FilterDrawer setParams={setParams} />
           </div>
           {/* car show div  */}
-          <div className="text-white text-lg mt-20">
+          <div className="text-white text-lg mt-20 col-span-12 md:col-span-9 ">
             {!isFetching ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 justify-center items-center">
                 {data?.data?.result.length ? (
