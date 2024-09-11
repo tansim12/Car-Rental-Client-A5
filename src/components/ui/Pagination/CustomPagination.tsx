@@ -4,23 +4,22 @@ import { Pagination } from "antd";
 import "./customPagination.css"; // Import the custom CSS
 
 type TCustomPaginationProps = {
-  limit: number;
   total: number;
   handlePagination: any;
+  isCustomPagination?: boolean;
 };
 
 const CustomPagination = ({
-  limit,
   total,
   handlePagination,
+  isCustomPagination=true
 }: TCustomPaginationProps) => {
   return (
-    <div className="custom-pagination">
+    <div className={`${isCustomPagination ? "custom-pagination": ""}`}>
       <Pagination
         responsive={true}
         showQuickJumper
         defaultCurrent={1}
-        pageSize={limit}
         total={total}
         onChange={handlePagination}
       />

@@ -22,13 +22,13 @@
   color: black;
 }
 
-.ant-pagination-options-quick-jumper {
+.custom-pagination .ant-pagination-options-quick-jumper {
   color: white;
 }
 
-.ant-pagination-item-link {
+.custom-pagination .ant-pagination-item-link {
   color: white !important;
 }
-.ant-pagination-item-ellipsis{
+.custom-pagination .ant-pagination-item-ellipsis{
   color: white !important;
 }

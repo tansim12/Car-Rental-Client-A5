@@ -1,26 +1,26 @@
+import { TQueryParams } from "../../../Types/car.types";
+
 import { baseApi } from "../../api/baseApi";
 
 const carManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // getAllStudents: builder.query({
-    //     query: (args) => {
-    //       const params = new URLSearchParams();
-    //       if (args) {
-    //         args.forEach((item: TQueryParamAcademicSemester) => {
-    //           params.append(item.name, item.value as string);
-    //         });
-    //       }
+    getAllCarsByAdmin: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
 
-    //       return {
-    //         url: "/students",
-    //         method: "GET",
-    //         params: params,
-    //       };
-    //     },
-    //     transformResponse: (response: TReduxResponse<TStudent[]>) => {
-    //       return response?.data;
-    //     },
-    //   }),
+        return {
+          url: "/cars/find-cars-admin",
+          method: "GET",
+          params: params,
+        };
+      },
+     
+    }),
 
     createCar: builder.mutation({
       query: (body) => ({
@@ -32,4 +32,5 @@ const carManagementApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateCarMutation } = carManagementApi;
+export const { useCreateCarMutation, useGetAllCarsByAdminQuery } =
+  carManagementApi;

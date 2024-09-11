@@ -45,7 +45,7 @@ const CarListing = () => {
         </div>
         {/* pagination div  */}
         <div className="flex justify-center items-center my-20">
-          <CustomPagination limit={4} total={100} handlePagination={handlePagination} />
+          <CustomPagination  total={100} handlePagination={handlePagination} />
         </div>
       </Container>
     </div>

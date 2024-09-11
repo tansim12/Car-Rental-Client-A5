@@ -54,4 +54,12 @@ export interface TCar {
   images?: string[];
   faqs: Faq[];
   isDelete?: boolean;
+  createdAt?:string
 }
+
+
+
+export type TQueryParams = {
+  name: string;
+  value: boolean | React.Key;
+};
