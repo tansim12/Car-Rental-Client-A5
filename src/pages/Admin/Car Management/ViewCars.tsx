@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { Table, Button, Input, Space, Tag, Modal } from "antd";
+import { Table, Button, Input, Space, Tag, Modal, message } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import type { TableColumnsType, TableProps } from "antd";
 import moment from "moment";
 import { TCar, TQueryParams } from "../../../Types/car.types";
-import { useGetAllCarsByAdminQuery } from "../../../Redux/Feature/Admin/carManagement.api";
+import {
+  useGetAllCarsByAdminQuery,
+  useUpdateCarMutation,
+} from "../../../Redux/Feature/Admin/carManagement.api";
 import CustomPagination from "../../../components/ui/Pagination/CustomPagination";
 import customPaginationFn from "../../../utils/customPaginationFn";
+import { handleApiError } from "../../../utils/handleApiError";
+import toast from "react-hot-toast";
 
 export type TTableData = Partial<TCar>;
 
@@ -17,12 +22,14 @@ const ViewCars: React.FC = () => {
       { name: "sort", value: "-createdAt" },
       ...params,
     ]);
+  const [updateCar] = useUpdateCarMutation();
 
   const tableData: TTableData[] = allCarData?.data?.result?.map(
     (car: TTableData) => ({
       key: car?._id,
       _id: car?._id,
       image: car?.images?.[0],
+      isDelete: car?.isDelete,
       name: car.name,
       category: car.category,
       brand: car.brand,
@@ -66,6 +73,19 @@ const ViewCars: React.FC = () => {
       dataIndex: "category",
       key: "category",
       width: 120,
+    },
+    {
+      title: "Status",
+      dataIndex: "isDelete",
+      key: "isDelete",
+      width: 120,
+      render: (isDelete: boolean) => {
+        return (
+          <Tag color={isDelete ? "red" : "green"}>
+            {isDelete ? "Deleted" : "Active"}
+          </Tag>
+        );
+      },
     },
     {
       title: "Brand",
@@ -171,13 +191,30 @@ const ViewCars: React.FC = () => {
   const handleDelete = (id: string) => {
     Modal.confirm({
       title: "Are you sure you want to delete this record?",
-      content: `This action cannot be undone. Record: ${id}`,
+      content: `This action cannot be undone.`,
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
-      onOk: () => {
-        // setData(prevData => prevData.filter(item => item.key !== record.key));
-        // message.success('Record deleted successfully.');
+      onOk: async () => {
+        const toastId = toast.loading("Deleting..");
+        try {
+          const payload = {
+            body: {
+              isDelete: true,
+            },
+            id,
+          };
+          const res = await updateCar(payload).unwrap();
+          if (res?.success) {
+            toast.success("Car Create Successfully done", {
+              id: toastId,
+              duration: 3000,
+            });
+          }
+        } catch (error) {
+          handleApiError(error, toastId);
+        }
+        message.success("Record deleted successfully.");
       },
     });
   };
@@ -204,8 +241,8 @@ const ViewCars: React.FC = () => {
     setParams([{ name: "searchTerm", value: value }, ...params]);
   };
 
-  const handlePagination = customPaginationFn(setParams)
-  
+  const handlePagination = customPaginationFn(setParams);
+
   return (
     <>
       <div>
@@ -221,7 +258,7 @@ const ViewCars: React.FC = () => {
           columns={columns}
           loading={carDataLoading}
           dataSource={tableData}
-          scroll={{ x: 1300 }}
+          scroll={{ x: 1400 }}
           pagination={false}
           onChange={onChange}
           bordered

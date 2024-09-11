@@ -60,7 +60,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
 // Define a service using a base URL and expected endpoints
 export const baseApi = createApi({
-  tagTypes: ["CourseManage", "AllCourse"],
+  tagTypes: ["AllCars"],
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
