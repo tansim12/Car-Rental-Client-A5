@@ -1,6 +1,11 @@
 import { useEffect, useRef } from "react";
 import { animate, scroll, spring } from "motion";
 import { ReactLenis } from "lenis/react";
+import working from "../../../assets/Image/working2.jpg";
+import flexab from "../../../assets/Image/flexablity.jpg";
+import afford from "../../../assets/Image/afford.jpg";
+import variety from "../../../assets/Image/Variety.jpg";
+import Reliability from "../../../assets/Image/Reliability.webp";
 
 const WhyChooseUs = () => {
   const ulRef = useRef<HTMLUListElement | null>(null);
@@ -64,21 +69,18 @@ const WhyChooseUs = () => {
             <header className="text-white relative w-full bg-slate-950 grid place-content-center h-[80vh]">
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
               <h1 className="text-6xl font-bold text-center tracking-tight">
-                I know You Love to Scroll <br />
-                So Scroll
+                Why Choose Us for <br />
+                <span className="text-secondary">Car Rentals </span>
               </h1>
             </header>
             <section className="h-[500vh] relative   ">
-              <ul
-                ref={ulRef}
-                className="flex sticky top-0"
-              >
+              <ul ref={ulRef} className="flex sticky top-0">
                 <li className="h-screen w-screen flex-shrink-0 bg-red-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    PASSION
+                    Flexibility
                   </h2>
                   <img
-                    src="https://res.cloudinary.com/dzl9yxixg/image/upload/v1713532202/ui-layout/team_gsu8ej.png"
+                    src={flexab}
                     className="2xl:w-[550px] w-[380px] absolute bottom-0"
                     width={500}
                     height={500}
@@ -90,7 +92,7 @@ const WhyChooseUs = () => {
                     WORK
                   </h2>
                   <img
-                    src="https://res.cloudinary.com/dzl9yxixg/image/upload/v1713532202/ui-layout/team_gsu8ej.png"
+                    src={working}
                     className="2xl:w-[550px] w-[380px] absolute bottom-0"
                     width={500}
                     height={500}
@@ -99,10 +101,10 @@ const WhyChooseUs = () => {
                 </li>
                 <li className="h-screen w-screen flex-shrink-0 bg-orange-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    MOTIVATION
+                    Affordability
                   </h2>
                   <img
-                    src="https://res.cloudinary.com/dzl9yxixg/image/upload/v1713532202/ui-layout/team_gsu8ej.png"
+                    src={afford}
                     className="2xl:w-[550px] w-[380px] absolute bottom-0"
                     width={500}
                     height={500}
@@ -111,10 +113,10 @@ const WhyChooseUs = () => {
                 </li>
                 <li className="h-screen w-screen  flex-shrink-0 bg-yellow-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    INSPIRATION
+                    Variety
                   </h2>
                   <img
-                    src="https://res.cloudinary.com/dzl9yxixg/image/upload/v1713532202/ui-layout/team_gsu8ej.png"
+                    src={variety}
                     className="2xl:w-[550px] w-[380px] absolute bottom-0"
                     width={500}
                     height={500}
@@ -123,10 +125,10 @@ const WhyChooseUs = () => {
                 </li>
                 <li className="h-screen w-screen flex-shrink-0 bg-green-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    BELIEVE
+                    Reliability
                   </h2>
                   <img
-                    src="https://res.cloudinary.com/dzl9yxixg/image/upload/v1713532202/ui-layout/team_gsu8ej.png"
+                    src={Reliability}
                     className="2xl:w-[550px] w-[380px] absolute bottom-0"
                     width={500}
                     height={500}
