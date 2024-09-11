@@ -10,10 +10,6 @@ import { adminRoutes } from "./route.admin";
 import MainLayout from "../Layout/Dashboard Layout/MainLayout";
 import PrivateRoute from "./PrivateRoute";
 import { userRoutes } from "./route.user";
-// import DashboardLayout from "../Layout/Dashboard Layout/DashboardLayout";
-// import PaymentSuccess from "../pages/Payment Success & Failed/PaymentSuccess";
-// import AdminDashboard from "../Layout/Admin Dashboard/AdminDashboard";
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +26,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "car-details/:id",
-        element: <CarDetails />,
+        element: (
+          <PrivateRoute role="user">
+            <CarDetails />,
+          </PrivateRoute>
+        ),
       },
     ],
   },

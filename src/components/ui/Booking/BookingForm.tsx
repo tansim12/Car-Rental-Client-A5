@@ -12,7 +12,11 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { calculateDaysDifference } from "../../../utils/calculateDaysDifference";
 import { TCar } from "../../../Types/car.types";
+import toast from "react-hot-toast";
+import { useCreateBookingMutation } from "../../../Redux/Feature/Public User/user";
+import { handleApiError } from "../../../utils/handleApiError";
 const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
+  const [createBooking] = useCreateBookingMutation();
   const pickUpLocOptions = carAvailableAreaArray?.map((item) => ({
     label: item,
     value: item,
@@ -31,7 +35,24 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
       startDate, // Start date formatted as YYYY-MM-DD
       endDate, // End date formatted as YYYY-MM-DD
     };
-    console.log(payload);
+    if (carData?.availability !== "available") {
+      return toast.error("This Car Unavailable Now !");
+    }
+    const toastId = toast.loading("Booking Slot....");
+    try {
+      const res = await createBooking(payload).unwrap();
+      if (res?.success) {
+        toast.success("Booking Slot Successfully done", {
+          id: toastId,
+          duration: 3000,
+        });
+
+        // ! todo navigate dashboard booking
+      }
+    } catch (error) {
+      handleApiError(error, toastId);
+    }
+    
   };
 
   useEffect(() => {

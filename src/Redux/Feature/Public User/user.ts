@@ -33,7 +33,18 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["AllCars"],
     }),
+    createBooking: builder.mutation({
+      query: (body) => ({
+        url: "/bookings",
+        method: "POST",
+        body: body,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserInfoQuery, useGetAllCarsByUserQuery } = userApi;
+export const {
+  useGetUserInfoQuery,
+  useGetAllCarsByUserQuery,
+  useCreateBookingMutation,
+} = userApi;
