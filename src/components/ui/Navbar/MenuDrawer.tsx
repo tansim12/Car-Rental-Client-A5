@@ -9,6 +9,8 @@ import ProfileDropDown from "./ProfileDropDown";
 import { USER_STATUS } from "../../../Const/user.const";
 import CustomOutlineButton from "../Button/CustomOutlineButton";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
 
 const MenuDrawer = ({
   userData,
@@ -26,7 +28,7 @@ const MenuDrawer = ({
   const onClose = () => {
     setOpen(false);
   };
-
+  const setLocation = useDispatch();
   return (
     <>
       <Space>
@@ -52,7 +54,15 @@ const MenuDrawer = ({
         </div> */}
         <div className="text-white flex flex-col items-center  gap-5 text-sm w-full justify-end">
           <CustomNavLink label="Home" to="/" fontWidth="16px" />
-          <CustomNavLink label="Car Listing" to="/listing" fontWidth="16px" />
+          <div
+            onClick={(e) => {
+              e.preventDefault();
+              setLocation(currentLocation(""));
+              navigate("/listing");
+            }}
+          >
+            <CustomNavLink label="Car Listing" to="/listing" fontWidth="16px" />
+          </div>
 
           <CustomNavLink label="About" to="/about" fontWidth="16px" />
 
