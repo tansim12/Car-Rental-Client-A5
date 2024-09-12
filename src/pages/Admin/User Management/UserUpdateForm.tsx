@@ -11,7 +11,6 @@ import { handleApiError } from "../../../utils/handleApiError";
 const UserUpdateForm = ({ userData }: { userData: Partial<TUser> }) => {
   const [updateUserInfo] = useUpdateUserInfoMutation();
 
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const payload = {
       body: {
@@ -22,7 +21,6 @@ const UserUpdateForm = ({ userData }: { userData: Partial<TUser> }) => {
       },
       id: userData?._id,
     };
-
     const toastId = toast.loading("Update ...");
     try {
       const res = await updateUserInfo(payload).unwrap();

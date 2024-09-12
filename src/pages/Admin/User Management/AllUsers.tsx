@@ -27,9 +27,6 @@ const AllUsers = () => {
     { name: "sort", value: "-createdAt" },
     ...params,
   ]);
-
-  console.log(data);
-
   const tableData: TTableData[] = data?.data?.result?.map((u: TTableData) => ({
     key: u?._id,
     _id: u?._id,

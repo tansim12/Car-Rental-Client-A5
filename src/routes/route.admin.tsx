@@ -54,7 +54,6 @@ export const adminPath: IAccRoutes[] = [
         path: "all-paid-booking",
         element: <AllBookingByAdmin />,
       },
-      
     ],
     path: "",
     element: undefined,
