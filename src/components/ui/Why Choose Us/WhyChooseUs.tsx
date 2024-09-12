@@ -45,9 +45,6 @@ const WhyChooseUs = () => {
 
       if (header) {
         const animation = animate([header], { x: [800, -800] });
-
-        console.log("Animation for header:", animation);
-
         scroll(animation, {
           target: section,
           offset: [

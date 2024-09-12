@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 
 import { authReducer } from "./Feature/Auth/authSlice";
 import { baseApi } from "./api/baseApi";
+import { locationReducer } from "./Feature/Normal/availableAreaSlice";
 
 const persistConfig = {
   key: "auth",
@@ -25,6 +26,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer); // target r
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    location: locationReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

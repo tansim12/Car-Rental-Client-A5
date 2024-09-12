@@ -10,6 +10,8 @@ import { useGetUserInfoQuery } from "../../../Redux/Feature/Public User/user";
 import { USER_STATUS } from "../../../Const/user.const";
 import ProfileDropDown from "./ProfileDropDown";
 import { TUser } from "../../../Types/user.type";
+import { useDispatch } from "react-redux";
+import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Navbar = () => {
   const user = useAppSelector((s) => s?.auth?.user);
   const id = user ? user?.id : null;
   const { data: userData } = useGetUserInfoQuery(id, { skip: !id });
-
+  const setLocation = useDispatch();
   return (
     <div className="absolute w-full  ">
       {/* navbar  */}
@@ -38,11 +40,19 @@ const Navbar = () => {
             <div className=" hidden md:flex justify-evenly items-center gap-5 w-[75%] ">
               <div className="text-white flex items-center  gap-5 text-sm w-full justify-end">
                 <CustomNavLink label="Home" to="/" fontWidth="16px" />
-                <CustomNavLink
-                  label="Car Listing"
-                  to="/listing"
-                  fontWidth="16px"
-                />
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setLocation(currentLocation(""));
+                    navigate("/listing");
+                  }}
+                >
+                  <CustomNavLink
+                    label="Car Listing"
+                    to="/listing"
+                    fontWidth="16px"
+                  />
+                </div>
 
                 <CustomNavLink label="About" to="/about" fontWidth="16px" />
 
@@ -83,7 +93,10 @@ const Navbar = () => {
 
             {/* small device menu div  */}
             <div className="visible md:hidden">
-              <MenuDrawer userData={userData as Partial<TUser>} id={id as string} />
+              <MenuDrawer
+                userData={userData as Partial<TUser>}
+                id={id as string}
+              />
             </div>
           </div>
         </div>

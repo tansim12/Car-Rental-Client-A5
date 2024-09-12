@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import car from "../../../assets/Videos/car.mp4";
-import { BiCurrentLocation } from "react-icons/bi";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import CustomButton from "../Button/CustomButton";
 import { useNavigate } from "react-router-dom";
+import LocationSearch from "./LocationSearch";
+
 const HomePageSlider: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const navigate = useNavigate();
@@ -57,12 +58,7 @@ const HomePageSlider: React.FC = () => {
             />
           </div>
           <div>
-            <CustomButton
-              name="Location"
-              isTransParent={true}
-              icon={BiCurrentLocation}
-              size={20}
-            />
+            <LocationSearch />
           </div>
         </div>
       </div>

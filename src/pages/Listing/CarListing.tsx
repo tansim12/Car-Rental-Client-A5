@@ -6,13 +6,15 @@ import CustomPagination from "../../components/ui/Pagination/CustomPagination";
 import ReUseableBanner from "../../components/ui/Reuseable Banner/ReUseableBanner";
 import { useGetAllCarsByUserQuery } from "../../Redux/Feature/Public User/user";
 import { TCar, TQueryParams } from "../../Types/car.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import customPaginationFn from "../../utils/customPaginationFn";
 import LoadingPage from "../Loading/LoadingPage";
+import { useAppSelector } from "../../Redux/hook";
 
 const CarListing = () => {
   const [params, setParams] = useState<TQueryParams[]>([]);
-  const { data, isFetching } = useGetAllCarsByUserQuery([
+  const currentLocation = useAppSelector((s) => s.location);
+  const { data, isFetching, refetch } = useGetAllCarsByUserQuery([
     { name: "sort", value: "-createdAt" },
     {
       name: "fields",
@@ -21,8 +23,16 @@ const CarListing = () => {
     },
     ...params,
   ]);
-
   const handlePagination = customPaginationFn(setParams);
+  useEffect(() => {
+    if (currentLocation !== null && currentLocation !== undefined  && currentLocation !== "") {
+      setParams(prevParams => [
+        { name: "availableAreas", value: currentLocation },
+        ...prevParams,
+      ]);
+      refetch()
+    }
+  }, [currentLocation,refetch]);
   return (
     <div>
       <div className="">
