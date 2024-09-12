@@ -9,6 +9,7 @@ import { TBookings } from "../../../Types/booking.type";
 import CustomPagination from "../../../components/ui/Pagination/CustomPagination";
 import {
   Button,
+  Drawer,
   Input,
   message,
   Modal,
@@ -19,16 +20,15 @@ import {
   Tag,
 } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { handleApiError } from "../../../utils/handleApiError";
 import customPaginationFn from "../../../utils/customPaginationFn";
 import moment from "moment";
 import { MdOutlinePayment } from "react-icons/md";
+import UpdateBookingInfoByUser from "./UpdateBookingInfoByUser";
 
 export type TTableData = Partial<TBookings>;
 const AllBookingByUser = () => {
-  const navigate = useNavigate();
   const [params, setParams] = useState<TQueryParams[]>([]);
   const { data, isFetching: allBookingLoading } = useUserAllBookingsQuery([
     { name: "sort", value: "-createdAt" },
@@ -43,6 +43,7 @@ const AllBookingByUser = () => {
       key: booking?._id,
       _id: booking?._id,
       carImage: booking?.carId?.images[0],
+      carId: booking?.carId,
       carName: booking?.carId?.name,
       carAvailability: booking?.carId?.availability,
       rentalPricePerDay: booking?.rentalPricePerDay,
@@ -81,6 +82,22 @@ const AllBookingByUser = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const [selectedBookingData, setSelectedBookingData] = useState<object | null>(
+    {}
+  );
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const handleEdit = (bookingData: object) => {
+    console.log(bookingData);
+
+    setSelectedBookingData(bookingData);
+    setDrawerVisible(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setDrawerVisible(false);
+  };
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -203,9 +220,7 @@ const AllBookingByUser = () => {
         return (
           <div>
             {paymentStatus === 0 && (
-              <Tag color="red">
-                Advanced Payment Done, Please Advanced Payment
-              </Tag>
+              <Tag color="red">Please Advanced Payment</Tag>
             )}
             {paymentStatus === 1 && (
               <Tag color="green">
@@ -249,8 +264,6 @@ const AllBookingByUser = () => {
       fixed: "right",
       width: 100,
       render: (_, record) => {
-        console.log(record);
-
         return (
           <Space size="middle">
             {/* edit button  */}
@@ -258,8 +271,19 @@ const AllBookingByUser = () => {
               size="small"
               type="link"
               icon={<EditOutlined />}
-              onClick={() => handleEdit(record?._id as string)}
-            />
+              onClick={() =>
+                handleEdit({
+                  startDate: record?.startDate,
+                  endDate: record?.endDate,
+                  carId: record?.carId?._id,
+                  dropOffArea: record?.dropOffArea,
+                  pickupArea: record?.pickupArea,
+                  rentalPricePerDay: record?.rentalPricePerDay,
+                  availability:record?.carId?.availability,
+                  id:record?._id
+                })
+              }
+            ></Button>
             {/* delete button */}
             <Button
               size="small"
@@ -304,13 +328,6 @@ const AllBookingByUser = () => {
       },
     },
   ];
-
-  const handleEdit = (id: string) => {
-    if (id) {
-      navigate(`/admin/update-car/${id}`);
-    }
-    // Open a modal or navigate to the edit page
-  };
 
   const handleAdvancePayment = async (bookingId: string) => {
     if (bookingId) {
@@ -427,6 +444,21 @@ const AllBookingByUser = () => {
           bordered
         />
       </div>
+
+      {selectedBookingData && (
+        <Drawer
+          title="Edit Booking"
+          placement="left"
+          closable={true}
+          onClose={handleCloseDrawer}
+          visible={drawerVisible}
+        >
+          <UpdateBookingInfoByUser
+            bookingData={selectedBookingData as object}
+          />
+        </Drawer>
+      )}
+
       <div className="flex justify-center items-center gap-5 my-20">
         <CustomPagination
           handlePagination={handlePagination}
