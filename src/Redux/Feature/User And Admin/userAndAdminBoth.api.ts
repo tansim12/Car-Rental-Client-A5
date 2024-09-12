@@ -10,7 +10,16 @@ const userAndAdminBothApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Booking"],
     }),
+
+    updateUserInfo: builder.mutation({
+      query: (payload) => ({
+        url: `/user/profile-update/${payload?.id}`,
+        method: "PUT",
+        body: payload?.body,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const {useUpdateBookingMutation} = userAndAdminBothApi;
+export const { useUpdateBookingMutation, useUpdateUserInfoMutation } = userAndAdminBothApi;

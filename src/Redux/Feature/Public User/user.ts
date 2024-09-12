@@ -15,6 +15,7 @@ const userApi = baseApi.injectEndpoints({
       transformResponse: (response: TReduxResponse<TUser>) => {
         return response?.data;
       },
+      providesTags: ["User"],
     }),
     createBooking: builder.mutation({
       query: (body) => ({
@@ -22,16 +23,16 @@ const userApi = baseApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
-      invalidatesTags:["Booking"]
+      invalidatesTags: ["Booking"],
     }),
 
     getAllCarsByUser: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
-    
+
         // Group args by `name`
         const groupedArgs: Record<string, string[]> = {};
-    
+
         if (args) {
           args.forEach((item: TQueryParams) => {
             if (!groupedArgs[item.name]) {
@@ -40,12 +41,12 @@ const userApi = baseApi.injectEndpoints({
             groupedArgs[item.name].push(item.value as string);
           });
         }
-    
+
         // Append the grouped values for each `name`
         Object.keys(groupedArgs).forEach((name) => {
-          params.append(name, groupedArgs[name].join(' '));
+          params.append(name, groupedArgs[name].join(" "));
         });
-    
+
         return {
           url: "/cars",
           method: "GET",
@@ -54,7 +55,6 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["AllCars"],
     }),
-    
   }),
 });
 

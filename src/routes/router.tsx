@@ -14,6 +14,8 @@ import AboutUs from "../pages/About/AboutUs";
 import PaymentCancelPage from "../pages/Payment pages/PaymentCancelPage";
 import PaymentSuccessPage from "../pages/Payment pages/PaymentSuccessPage";
 import PaymentFailed from "../pages/Payment pages/PaymentFailed";
+import ProfilePage from "../pages/Profile/ProfilePage";
+import EditProfilePage from "../pages/Profile/EditProfilePage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +51,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute role="user">
             <CarDetails />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute role="user">
+            <ProfilePage />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "edit-profile",
+        element: (
+          <PrivateRoute role="user">
+            <EditProfilePage />,
           </PrivateRoute>
         ),
       },
