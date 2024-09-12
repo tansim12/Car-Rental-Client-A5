@@ -15,7 +15,9 @@ import { TCar } from "../../../Types/car.types";
 import toast from "react-hot-toast";
 import { useCreateBookingMutation } from "../../../Redux/Feature/Public User/user";
 import { handleApiError } from "../../../utils/handleApiError";
+import { useNavigate } from "react-router-dom";
 const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
+  const navigate = useNavigate();
   const [createBooking] = useCreateBookingMutation();
   const pickUpLocOptions = carAvailableAreaArray?.map((item) => ({
     label: item,
@@ -46,13 +48,11 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
           id: toastId,
           duration: 3000,
         });
-
-        // ! todo navigate dashboard booking
+        navigate("/user/all-bookings");
       }
     } catch (error) {
       handleApiError(error, toastId);
     }
-    
   };
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
                 name="Confirm"
                 customCss="w-full py-5"
                 textColor="black"
-                disabled={carData?.availability !== "available" }
+                disabled={carData?.availability !== "available"}
               />
             </div>
           </CustomForm>

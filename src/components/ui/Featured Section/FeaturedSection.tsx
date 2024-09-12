@@ -40,6 +40,8 @@ const FeaturedSection: React.FC = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllCarsByUserQuery([
     { name: "limit", value: 5 },
+    { name: "sort", value: "-createdAt" },
+
     { name: "searchTerm", value: "Featured" },
     {
       name: "fields",

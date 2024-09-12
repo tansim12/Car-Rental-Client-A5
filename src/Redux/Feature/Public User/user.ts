@@ -22,6 +22,7 @@ const userApi = baseApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
+      invalidatesTags:["Booking"]
     }),
 
     getAllCarsByUser: builder.query({
