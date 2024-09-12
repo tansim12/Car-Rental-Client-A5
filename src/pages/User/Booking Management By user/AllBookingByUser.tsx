@@ -42,7 +42,7 @@ const AllBookingByUser = () => {
     (booking: TTableData) => ({
       key: booking?._id,
       _id: booking?._id,
-      carImage: booking?.carId?.images[0],
+      carImage: booking?.carId?.images?.[0],
       carId: booking?.carId,
       carName: booking?.carId?.name,
       carAvailability: booking?.carId?.availability,
@@ -216,18 +216,21 @@ const AllBookingByUser = () => {
       dataIndex: "paymentStatus",
       key: "paymentStatus",
       width: 320,
-      render: (paymentStatus) => {
+      render: (paymentStatus, record) => {
         return (
           <div>
             {paymentStatus === 0 && (
               <Tag color="red">Please Advanced Payment</Tag>
             )}
-            {paymentStatus === 1 && (
+            {paymentStatus === 1 && record?.adminApprove !== 1 && (
               <Tag color="green">
-                Advanced Payment Done,Waiting For Admin Approve
+                Advanced Payment Done,Waiting For Admin Approve(1)
               </Tag>
             )}
-            {paymentStatus === 2 && <Tag color="blue">Deu Payment Done</Tag>}
+            {record?.adminApprove === 1 && paymentStatus === 1 && (
+              <Tag color="blue">Can go. Deu Payment Pending(2)</Tag>
+            )}
+            {paymentStatus === 2 && <Tag color="purple">Deu Payment Done</Tag>}
           </div>
         );
       },
@@ -270,6 +273,7 @@ const AllBookingByUser = () => {
             <Button
               size="small"
               type="link"
+              disabled={record?.carId?.availability === "unavailable"}
               icon={<EditOutlined />}
               onClick={() =>
                 handleEdit({
@@ -279,8 +283,8 @@ const AllBookingByUser = () => {
                   dropOffArea: record?.dropOffArea,
                   pickupArea: record?.pickupArea,
                   rentalPricePerDay: record?.rentalPricePerDay,
-                  availability:record?.carId?.availability,
-                  id:record?._id
+                  availability: record?.carId?.availability,
+                  id: record?._id,
                 })
               }
             ></Button>
@@ -301,7 +305,8 @@ const AllBookingByUser = () => {
                 record?.paymentStatus === 1 ||
                 record?.paymentStatus === 2 ||
                 record?.orderCancel ||
-                record?.adminApprove !== 0
+                record?.adminApprove !== 0 ||
+                record?.carId?.availability === "unavailable"
               }
               icon={<MdOutlinePayment />}
               onClick={() => handleAdvancePayment(record?._id as string)}

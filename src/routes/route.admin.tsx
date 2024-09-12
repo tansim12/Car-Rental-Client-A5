@@ -1,4 +1,5 @@
 import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AllBookingByAdmin from "../pages/Admin/Booking Management Admin/AllBookingByAdmin";
 import CreateCar from "../pages/Admin/Car Management/CreateCar";
 import UpdateCar from "../pages/Admin/Car Management/UpdateCar";
 import ViewCars from "../pages/Admin/Car Management/ViewCars";
@@ -41,6 +42,19 @@ export const adminPath: IAccRoutes[] = [
         path: "update-car/:id",
         element: <UpdateCar />,
       },
+    ],
+    path: "",
+    element: undefined,
+  },
+  {
+    name: "Paid Booking M.",
+    children: [
+      {
+        name: "View Paid Booking",
+        path: "all-paid-booking",
+        element: <AllBookingByAdmin />,
+      },
+      
     ],
     path: "",
     element: undefined,

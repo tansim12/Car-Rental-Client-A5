@@ -5,6 +5,10 @@ type TCarId = {
   images: string[];
   availability:string
 };
+type TUserId = {
+  _id: string;
+  email:string
+} ;
 
 export type TPaymentInfo = {
   mer_txnid: string;
@@ -25,7 +29,7 @@ export interface TBookings {
   dropOffArea: TAvailableArea;
   startDate: string;
   endDate: string;
-  userId?: string;
+  userId?: TUserId ;
   orderCancel?: boolean;
   advancePayment?: number;
   rentalPricePerDay?: number;
