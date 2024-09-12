@@ -456,6 +456,7 @@ const AllBookingByUser = () => {
           placement="left"
           closable={true}
           onClose={handleCloseDrawer}
+          width={300}
           visible={drawerVisible}
         >
           <UpdateBookingInfoByUser

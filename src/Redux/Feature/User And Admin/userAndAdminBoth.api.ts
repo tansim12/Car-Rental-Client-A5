@@ -17,7 +17,7 @@ const userAndAdminBothApi = baseApi.injectEndpoints({
         method: "PUT",
         body: payload?.body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User","AllUsers"],
     }),
   }),
 });
