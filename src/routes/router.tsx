@@ -16,6 +16,7 @@ import PaymentSuccessPage from "../pages/Payment pages/PaymentSuccessPage";
 import PaymentFailed from "../pages/Payment pages/PaymentFailed";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import EditProfilePage from "../pages/Profile/EditProfilePage";
+import BothPrivateRoute from "./BothPrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -57,17 +58,17 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: (
-          <PrivateRoute role="user">
+          <BothPrivateRoute roles={["user", "admin"]}>
             <ProfilePage />,
-          </PrivateRoute>
+          </BothPrivateRoute>
         ),
       },
       {
         path: "edit-profile",
         element: (
-          <PrivateRoute role="user">
+          <BothPrivateRoute roles={["user", "admin"]}>
             <EditProfilePage />,
-          </PrivateRoute>
+          </BothPrivateRoute>
         ),
       },
     ],
