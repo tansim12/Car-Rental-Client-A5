@@ -1,8 +1,9 @@
+import Calender from "../../components/ui/Calender/Calender";
 
 const AdminDashboard = () => {
     return (
         <div>
-            AdminDashboard
+            <Calender />
         </div>
     );
 };
