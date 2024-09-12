@@ -3,14 +3,6 @@ import { baseApi } from "../../../api/baseApi";
 
 const userBookingManagement = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // createBooking: builder.mutation({
-    //   query: (body) => ({
-    //     url: "/bookings",
-    //     method: "POST",
-    //     body: body,
-    //   }),
-    // }),
-
     userAllBookings: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -40,7 +32,25 @@ const userBookingManagement = baseApi.injectEndpoints({
       },
       providesTags: ["Booking"],
     }),
+
+    updateBookingByUser: builder.mutation({
+      query: (payload) => ({
+        url: `/bookings/${payload?.id}`,
+        method: "PUT",
+        body: payload?.body,
+      }),
+      invalidatesTags: ["Booking"],
+    }),
+    payment: builder.mutation({
+      query: (body) => ({
+        url: `/payment`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Booking"],
+    }),
   }),
 });
 
-export const { useUserAllBookingsQuery } = userBookingManagement;
+export const { useUserAllBookingsQuery, useUpdateBookingByUserMutation, usePaymentMutation } =
+  userBookingManagement;

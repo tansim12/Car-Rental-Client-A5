@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { useUserAllBookingsQuery } from "../../../Redux/Feature/Public User/user Booking Management/userBookingManagement";
+import {
+  usePaymentMutation,
+  useUpdateBookingByUserMutation,
+  useUserAllBookingsQuery,
+} from "../../../Redux/Feature/Public User/user Booking Management/userBookingManagement";
 import { TQueryParams } from "../../../Types/car.types";
 import { TBookings } from "../../../Types/booking.type";
 import CustomPagination from "../../../components/ui/Pagination/CustomPagination";
@@ -20,6 +24,8 @@ import toast from "react-hot-toast";
 import { handleApiError } from "../../../utils/handleApiError";
 import customPaginationFn from "../../../utils/customPaginationFn";
 import moment from "moment";
+import { MdOutlinePayment } from "react-icons/md";
+
 export type TTableData = Partial<TBookings>;
 const AllBookingByUser = () => {
   const navigate = useNavigate();
@@ -28,6 +34,8 @@ const AllBookingByUser = () => {
     { name: "sort", value: "-createdAt" },
     ...params,
   ]);
+  const [updateBooking] = useUpdateBookingByUserMutation();
+  const [createPayment] = usePaymentMutation();
   console.log(data);
 
   const tableData: TTableData[] = data?.data?.result?.map(
@@ -54,7 +62,6 @@ const AllBookingByUser = () => {
     })
   );
 
-
   const [isFixed, setIsFixed] = useState(true); // State to handle fixed column
 
   // Function to handle window resize and update the fixed state
@@ -74,7 +81,6 @@ const AllBookingByUser = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -97,9 +103,9 @@ const AllBookingByUser = () => {
       key: "carName",
       width: 120,
       fixed: isFixed ? "left" : undefined, // Conditionally apply fixed
-      render:(name)=>{
-        return <span>{name?.slice(0,15)}</span>
-      }
+      render: (name) => {
+        return <span>{name?.slice(0, 15)}</span>;
+      },
     },
     {
       title: "Create Booking",
@@ -133,7 +139,6 @@ const AllBookingByUser = () => {
       key: "dropOffArea",
       width: 120,
     },
-    
 
     {
       title: "Start Date",
@@ -162,9 +167,12 @@ const AllBookingByUser = () => {
       render: (carAvailability) => {
         return (
           <div>
-            {carAvailability === "unavailable" && <Tag color="red">unavailable</Tag>}
-            {carAvailability === "available" && <Tag color="green">available</Tag>}
-            
+            {carAvailability === "unavailable" && (
+              <Tag color="red">unavailable</Tag>
+            )}
+            {carAvailability === "available" && (
+              <Tag color="green">available</Tag>
+            )}
           </div>
         );
       },
@@ -195,9 +203,15 @@ const AllBookingByUser = () => {
         return (
           <div>
             {paymentStatus === 0 && (
-              <Tag color="red">Advanced Payment Done, Please Advanced Payment</Tag>
+              <Tag color="red">
+                Advanced Payment Done, Please Advanced Payment
+              </Tag>
             )}
-            {paymentStatus === 1 && <Tag color="green">Advanced Payment Done,Waiting For Admin Approve</Tag>}
+            {paymentStatus === 1 && (
+              <Tag color="green">
+                Advanced Payment Done,Waiting For Admin Approve
+              </Tag>
+            )}
             {paymentStatus === 2 && <Tag color="blue">Deu Payment Done</Tag>}
           </div>
         );
@@ -228,38 +242,66 @@ const AllBookingByUser = () => {
       key: "deuPayment",
       width: 100,
     },
-    
+
     {
       title: "Actions",
       key: "actions",
       fixed: "right",
       width: 100,
-      render: (_, record) => (
-        <Space size="middle">
-          <Button
-            type="link"
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record?._id as string)}
-          />
-          <Button
-            type="link"
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record?._id as string)}
-          />
-          <Button
-            type="link"
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record?._id as string)}
-          />
-          <Button
-            type="link"
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record?._id as string)}
-          />
-        </Space>
-      ),
+      render: (_, record) => {
+        console.log(record);
+
+        return (
+          <Space size="middle">
+            {/* edit button  */}
+            <Button
+              size="small"
+              type="link"
+              icon={<EditOutlined />}
+              onClick={() => handleEdit(record?._id as string)}
+            />
+            {/* delete button */}
+            <Button
+              size="small"
+              disabled={record?.orderCancel}
+              type="link"
+              danger
+              icon={<DeleteOutlined />}
+              onClick={() => handleDelete(record?._id as string)}
+            />
+            {/* advanced payment button */}
+            <Button
+              size="small"
+              type="primary"
+              disabled={
+                record?.paymentStatus === 1 ||
+                record?.paymentStatus === 2 ||
+                record?.orderCancel ||
+                record?.adminApprove !== 0
+              }
+              icon={<MdOutlinePayment />}
+              onClick={() => handleAdvancePayment(record?._id as string)}
+            >
+              Advance
+            </Button>
+
+            {/* deu payment button  */}
+            <Button
+              size="small"
+              type="primary"
+              disabled={
+                record?.paymentStatus !== 1 ||
+                record?.orderCancel ||
+                record?.adminApprove !== 1
+              }
+              icon={<MdOutlinePayment />}
+              onClick={() => handleDuePayment(record?._id as string)}
+            >
+              Due
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
 
@@ -268,6 +310,45 @@ const AllBookingByUser = () => {
       navigate(`/admin/update-car/${id}`);
     }
     // Open a modal or navigate to the edit page
+  };
+
+  const handleAdvancePayment = async (bookingId: string) => {
+    if (bookingId) {
+      const toastId = toast.loading("Advance Payment..");
+      try {
+        const payload = {
+          bookingId,
+          isAdvancePayment: true,
+        };
+        const res = await createPayment(payload).unwrap();
+        if (res?.success) {
+          if (res?.data?.url) {
+            window.location.href = res.data.url; // Opens the URL in a new tab
+          }
+        }
+      } catch (error) {
+        handleApiError(error, toastId);
+      }
+    }
+  };
+  const handleDuePayment = async (bookingId: string) => {
+    if (bookingId) {
+      const toastId = toast.loading("Due Payment..");
+      try {
+        const payload = {
+          bookingId,
+          isAdvancePayment: false,
+        };
+        const res = await createPayment(payload).unwrap();
+        if (res?.success) {
+          if (res?.data?.url) {
+            window.location.href = res.data.url; // Opens the URL in a new tab
+          }
+        }
+      } catch (error) {
+        handleApiError(error, toastId);
+      }
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -282,11 +363,11 @@ const AllBookingByUser = () => {
         try {
           const payload = {
             body: {
-              isDelete: true,
+              orderCancel: true,
             },
             id,
           };
-          const res = await updateCar(payload).unwrap();
+          const res = await updateBooking(payload).unwrap();
           if (res?.success) {
             toast.success("Car Delete Successfully done", {
               id: toastId,

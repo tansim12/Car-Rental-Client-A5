@@ -11,6 +11,9 @@ import MainLayout from "../Layout/Dashboard Layout/MainLayout";
 import PrivateRoute from "./PrivateRoute";
 import { userRoutes } from "./route.user";
 import AboutUs from "../pages/About/AboutUs";
+import PaymentCancelPage from "../pages/Payment pages/PaymentCancelPage";
+import PaymentSuccessPage from "../pages/Payment pages/PaymentSuccessPage";
+import PaymentFailed from "../pages/Payment pages/PaymentFailed";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +31,18 @@ export const router = createBrowserRouter([
       {
         path: "about",
         element: <AboutUs />,
+      },
+      {
+        path: "payment-cancel",
+        element: <PaymentCancelPage />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccessPage />,
+      },
+      {
+        path: "/payment-failed",
+        element: <PaymentFailed />,
       },
       {
         path: "car-details/:id",
