@@ -13,17 +13,11 @@ import { setUser } from "../../Redux/Feature/Auth/authSlice";
 import verifyToken from "../../utils/verifyToken";
 import { handleApiError } from "../../utils/handleApiError";
 import CustomOutlineButton from "../../components/ui/Button/CustomOutlineButton";
-const defaultData = {
-  name: "abccc",
-  password: "password123",
-  confirmPassword: "password123",
-  email: "u3@gmail.com",
-  phone: "01849184020",
-};
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [register, ] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
     if (data?.password !== data?.confirmPassword) {
@@ -63,7 +57,6 @@ const Register = () => {
           <CustomForm
             onSubmit={onSubmit}
             resolver={zodResolver(registerSchema)}
-            defaultValues={defaultData}
           >
             <div>
               <CustomInput
@@ -112,8 +105,12 @@ const Register = () => {
                 />
               </div>
             </div>
-            <CustomOutlineButton name="Login" customCss="w-full"  textColor="black" isTransParent={false} />
-
+            <CustomOutlineButton
+              name="Sign up"
+              customCss="w-full"
+              textColor="black"
+              isTransParent={false}
+            />
           </CustomForm>
           <div className="text-center mt-4 ">
             <span>

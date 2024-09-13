@@ -11,8 +11,6 @@ import { setUser } from "../../Redux/Feature/Auth/authSlice";
 import { handleApiError } from "../../utils/handleApiError";
 import CustomOutlineButton from "../../components/ui/Button/CustomOutlineButton";
 
-const defaultValue = { email: "u4@gmail.com", password: "password123" };
-
 const Login = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
@@ -45,7 +43,7 @@ const Login = () => {
             <h2 className="mb-6 text-3xl font-semibold tracking-tight text-white">
               Sign In
             </h2>
-            <CustomForm onSubmit={onSubmit} defaultValues={defaultValue}>
+            <CustomForm onSubmit={onSubmit} >
               <div className="  ">
                 <CustomInput
                   name="email"
