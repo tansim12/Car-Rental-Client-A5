@@ -18,12 +18,17 @@ import { handleApiError } from "../../../utils/handleApiError";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { carZodValidation } from "../../../Schemas/carSchema";
 import ButtonBackgroundShine from "../../../components/ui/Button/ButtonBackgroundShine";
+import { uploadImagesToImgBB } from "../../../utils/imgbb";
 
 const CreateCar = () => {
   const [selectImages, setSelectImages] = useState([]);
-  const [createStudent, {isLoading}] = useCreateCarMutation();
+  const [createCar, { isLoading }] = useCreateCarMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+
+    const images = await uploadImagesToImgBB(selectImages);
+    console.log(images);
+    
     const payload = {
       ...data,
       seatingCapacity: Number(data?.seatingCapacity),
@@ -31,19 +36,12 @@ const CreateCar = () => {
       advance: Number(data?.advance),
       rentalPricePerDay: Number(data?.rentalPricePerDay),
       mileage: Number(data?.mileage),
+      images,
     };
-
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(payload));
-    if (selectImages && selectImages?.length > 0) {
-      for (let i = 0; i < selectImages?.length; i++) {
-        formData.append("file", selectImages[i]);
-      }
-    }
 
     const toastId = toast.loading("Creating");
     try {
-      const res = await createStudent(formData).unwrap();
+      const res = await createCar(payload).unwrap();
       if (res?.success) {
         toast.success("Car Create Successfully done", {
           id: toastId,
@@ -63,7 +61,7 @@ const CreateCar = () => {
       <div className="my-4">
         <CustomForm
           onSubmit={onSubmit}
-          defaultValues={carData}
+
           resolver={zodResolver(carZodValidation.createCarZodSchema)}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 ">
@@ -143,7 +141,11 @@ const CreateCar = () => {
             </div>
           </div>
 
-          <ButtonBackgroundShine name="Create Car" customCss="w-[30%]" isLoading={isLoading} />
+          <ButtonBackgroundShine
+            name="Create Car"
+            customCss="w-[30%]"
+            isLoading={isLoading}
+          />
         </CustomForm>
       </div>
     </div>
@@ -151,40 +153,3 @@ const CreateCar = () => {
 };
 
 export default CreateCar;
-const carData = {
-  name: "Toyota Camry 23",
-  category: "Luxury",
-  brand: "Toyota",
-  description: "A comfortable and reliable sedan with great fuel efficiency.",
-  type: "New Arrival",
-  model: "Camry XSE",
-  VIN: "4T1BF1FK6HU123456",
-  licensePlate: "ABC1234",
-  color: "Silver",
-  mileage: 25000,
-  rentalPricePerDay: 500,
-  advance: 100,
-  availability: "available",
-  availableAreas: ["Dhaka", "Chittagong", "Sylhet", "Pabna"],
-  numberOfDoors: 4,
-  seatingCapacity: 5,
-  features: ["Leather seats", "Sunroof", "Bluetooth connectivity"],
-  safetyFeatures: ["Anti-lock braking system", "Airbags", "Rearview camera"],
-  faqs: [
-    {
-      question: "What is the fuel efficiency of the car?",
-      answer: "The car has a fuel efficiency of 28 miles per gallon.",
-      id: "66d4aefec8e2acb52b10846e",
-    },
-    {
-      question: "Is the car available for long-term rentals?",
-      answer:
-        "Yes, the car is available for both short-term and long-term rentals.",
-      id: "66d4aefec8e2acb52b10846f",
-    },
-  ],
-  isDeleted: false,
-  createdAt: "2024-09-01T18:14:22.564Z",
-  updatedAt: "2024-09-03T14:33:33.919Z",
-  version: 0,
-};

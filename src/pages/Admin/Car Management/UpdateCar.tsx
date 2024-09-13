@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../../components/From/CustomForm";
 import CustomInput from "../../../components/From/CustomInput";
@@ -25,6 +26,7 @@ import ButtonBackgroundShine from "../../../components/ui/Button/ButtonBackgroun
 import { useNavigate, useParams } from "react-router-dom";
 import CustomToggle from "../../../components/From/CustomToggle";
 import LoadingPage from "../../Loading/LoadingPage";
+import { uploadImagesToImgBB } from "../../../utils/imgbb";
 
 const UpdateCar = () => {
   const navigate = useNavigate();
@@ -41,6 +43,12 @@ const UpdateCar = () => {
   }
   const [updateCar, { isLoading }] = useUpdateCarMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    let nimages = [];
+  
+    if (selectImages?.length) {
+      nimages = await uploadImagesToImgBB(selectImages);
+    }
+  
     const payload = {
       ...data,
       seatingCapacity: Number(data?.seatingCapacity),
@@ -48,21 +56,22 @@ const UpdateCar = () => {
       advance: Number(data?.advance),
       rentalPricePerDay: Number(data?.rentalPricePerDay),
       mileage: Number(data?.mileage),
+      images: nimages.length ? [...(data?.images || []), ...nimages] : data?.images || [],
     };
-    console.log(data);
-
-    const toastId = toast.loading("Update..");
+  
+    const toastId = toast.loading("Updating...");
     try {
       const newPayload = {
         body: {
           ...payload,
         },
         id,
-        file: selectImages,
       };
+      console.log(newPayload);
+  
       const res = await updateCar(newPayload).unwrap();
       if (res?.success) {
-        toast.success("Car Update Successfully done", {
+        toast.success("Car updated successfully!", {
           id: toastId,
           duration: 3000,
         });
@@ -72,6 +81,7 @@ const UpdateCar = () => {
       handleApiError(error, toastId);
     }
   };
+  
 
   return (
     <div>
@@ -183,7 +193,7 @@ const UpdateCar = () => {
             </div>
 
             <ButtonBackgroundShine
-              name="Create Car"
+              name="Update Car"
               customCss="w-[30%]"
               isLoading={isLoading}
             />

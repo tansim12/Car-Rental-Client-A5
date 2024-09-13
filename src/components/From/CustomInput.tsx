@@ -20,7 +20,7 @@ const CustomInput = ({
   return (
     <div
       style={{ marginBottom: "10px" }}
-      className={`${isLabelColor && "custom-label"}`}
+      className={isLabelColor ? "custom-label" : ""}
     >
       <Controller
         name={name}
@@ -35,6 +35,12 @@ const CustomInput = ({
               id={name}
               size="large"
               placeholder={placeholder}
+              onChange={(e) => {
+                // Ensure the value is parsed as a number if type is "number"
+                const value = type === "number" ? parseFloat(e.target.value) : e.target.value;
+                field.onChange(value);
+              }}
+              value={type === "number" ? (field.value || 0) : field.value}
             />
             {error && <small style={{ color: "red" }}>{error.message}</small>}
           </Form.Item>

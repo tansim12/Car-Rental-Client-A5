@@ -38,26 +38,18 @@ const carManagementApi = baseApi.injectEndpoints({
       }),
     }),
     updateCar: builder.mutation({
-      query: ({ body, file, id }) => {
-        const formData = new FormData();
-        // Append the JSON data to FormData as a string
-        formData.append("data", JSON.stringify(body));
-        // Append the file to FormData if it exists
-        console.log(file);
+      query: ({ body, id }) => { // Destructure payload
+        console.log(body);
         
-        if (file) {
-          for (let i = 0; i < file?.length; i++) {
-            formData.append("file", file[i]);
-          }
-        }
         return {
-          url: `/cars/${id}`, // Use the id directly
+          url: `/cars/${id}`, // Use the destructured id
           method: "PUT",
-          body: formData, // Send FormData
+          body: body, // Use the destructured body
         };
       },
       invalidatesTags: ["AllCars", "SingleCar"],
     }),
+    
   }),
 });
 

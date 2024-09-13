@@ -208,6 +208,8 @@ const ViewCars: React.FC = () => {
             },
             id,
           };
+          console.log(payload);
+          
           const res = await updateCar(payload).unwrap();
           if (res?.success) {
             toast.success("Car Delete Successfully done", {
