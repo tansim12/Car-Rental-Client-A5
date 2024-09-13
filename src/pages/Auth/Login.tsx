@@ -71,21 +71,14 @@ const Login = () => {
                   Keep me signed in
                 </label>
               </div>
-              {/* <button className="inline-flex h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium uppercase  hover:bg-white text-black hover:transition-all">
-                Submit
-               
-              </button> */}
-              {/* <ButtonBackgroundShine
-                name="Create Account"
-                width="full"
-              /> */}
+             
               <CustomOutlineButton name="Login" customCss="w-full"  textColor="black" isTransParent={false} />
             </CustomForm>
             <p className="mt-6 flex gap-1 text-sm text-white">
               Did you
-              <a className="text-sky-500 underline" href="#">
+              <span onClick={()=>navigate("/forget-password")} className="text-sky-500 underline cursor-pointer" >
                 forget your password?
-              </a>
+              </span>
             </p>
           </div>
           {/* Right side content */}

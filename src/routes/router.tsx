@@ -17,6 +17,7 @@ import PaymentFailed from "../pages/Payment pages/PaymentFailed";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import EditProfilePage from "../pages/Profile/EditProfilePage";
 import BothPrivateRoute from "./BothPrivateRoute";
+import ForgetPassword from "../pages/Forgat Password/ForgetPassword";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -98,6 +99,11 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <NoFoundPage />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
     errorElement: <NoFoundPage />,
   },
   {
