@@ -12,6 +12,7 @@ import ProfileDropDown from "./ProfileDropDown";
 import { TUser } from "../../../Types/user.type";
 import { useDispatch } from "react-redux";
 import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
+import ThemeToggle from "../Theme/ThemeToggle";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -89,6 +90,10 @@ const Navbar = () => {
                   <p>01849184000</p>
                 </div>
               </div>
+            </div>
+
+            <div>
+              <ThemeToggle />
             </div>
 
             {/* small device menu div  */}

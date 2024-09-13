@@ -111,7 +111,7 @@ const CustomerReview = () => {
   return (
     <section className=" py-10 px-3">
       <div className="max-w-screen-xl mx-auto px-4">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center text-white mb-12">What Clients Say</h2>
+        <h2 className="text-3xl lg:text-4xl font-bold text-center text-black dark:text-white mb-12">What Clients Say</h2>
         <Slider {...settings}>
           {testimonials.map((review, index) => (
             <div key={index}>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class', // Enable class-based dark mode
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,9 +9,9 @@ export default {
     extend: {
       colors: {
         pageBg: {
-          DEFAULT: '#1b1b1b',
-          light: '#ffffff',
-          dark: '#1b1b1b',
+          DEFAULT: '#1b1b1b', // Dark mode color
+          light: '#ffffff',   // Light mode color
+          dark: '#1b1b1b',    // Same as default for dark mode
         },
         primary: {
           DEFAULT: '#293897',
@@ -19,13 +20,9 @@ export default {
         },
         secondary: {
           DEFAULT: '#ffb84b',
-          // light: '#6cb2eb',
-          // dark: '#2779bd',
         },
         filterColor: {
           DEFAULT: '#2b2a2a',
-          // light: '#6cb2eb',
-          // dark: '#2779bd',
         },
       },
       animation: {
@@ -44,4 +41,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

@@ -7,6 +7,7 @@ import CustomSelect from "../../../components/From/CustomSelect";
 import ButtonBackgroundShine from "../../../components/ui/Button/ButtonBackgroundShine";
 import toast from "react-hot-toast";
 import { handleApiError } from "../../../utils/handleApiError";
+import CustomToggle from "../../../components/From/CustomToggle";
 
 const UserUpdateForm = ({ userData }: { userData: Partial<TUser> }) => {
   const [updateUserInfo] = useUpdateUserInfoMutation();
@@ -18,6 +19,7 @@ const UserUpdateForm = ({ userData }: { userData: Partial<TUser> }) => {
         role: data?.role,
         status: data?.status,
         phone: data?.phone,
+        isDelete:data?.isDelete
       },
       id: userData?._id,
     };
@@ -54,6 +56,7 @@ const UserUpdateForm = ({ userData }: { userData: Partial<TUser> }) => {
                 { label: "Block", value: "block" },
               ]}
             />
+            <CustomToggle label="Delete" name="isDelete" />
           </div>
 
           <div className="flex justify-center items-center">

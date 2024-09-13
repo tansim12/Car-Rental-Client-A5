@@ -4,7 +4,7 @@ import Footer from "./components/ui/Footer/Footer";
 
 const App = () => {
   return (
-    <div className="bg-pageBg">
+    <div className=" bg-pageBg ">
       <div className="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-lg">
         <Navbar />
       </div>

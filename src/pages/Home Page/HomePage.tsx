@@ -16,14 +16,14 @@ const HomePage = () => {
         <BannerCard />
       </div>
       {/* feature section  */}
-      <div className=" ">
+      <div className="dark:bg-pageBg bg-pageBg-light">
         <FeaturedSection />
       </div>
       <div className="">
         <WhyChooseUs />
         </div>
       {/* customer reviews  */}
-      <div className="">
+      <div className="dark:bg-pageBg bg-pageBg-light">
         <Container>
           <CustomerReview />
         </Container>
