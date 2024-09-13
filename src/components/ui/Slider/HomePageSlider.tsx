@@ -4,7 +4,7 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import CustomButton from "../Button/CustomButton";
 import { useNavigate } from "react-router-dom";
 import LocationSearch from "./LocationSearch";
-
+import homeBanner from "../../../assets/Image/home banner.jpg";
 const HomePageSlider: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const navigate = useNavigate();
@@ -17,7 +17,11 @@ const HomePageSlider: React.FC = () => {
       {/* Background Image */}
       {!videoLoaded && (
         <img
-          src="https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/7.jpg"
+          src={
+            homeBanner
+              ? homeBanner
+              : "https://webredox.net/demo/wp/renax/wp-content/uploads/2024/04/7.jpg"
+          }
           alt="Background"
           className="h-full w-full object-cover absolute top-0 left-0"
         />
