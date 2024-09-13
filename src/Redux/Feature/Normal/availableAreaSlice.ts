@@ -5,7 +5,7 @@ const locationSlice = createSlice({
   name: "location",
   initialState,
   reducers: {
-    currentLocation: (state, actions) => {
+    currentLocation: (_state, actions) => {
 
       if (actions?.payload === "") {
         return "";

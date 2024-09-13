@@ -1,6 +1,5 @@
 
 import AllBookingByUser from "../pages/User/Booking Management By user/AllBookingByUser";
-import Dummy from "../pages/User/Booking Management By user/Dummy";
 import UserDashboard from "../pages/User/UserDashboard";
 import { IAccRoutes } from "../Types/routes.type";
 import generateRoutes from "../utils/generateRoutes";

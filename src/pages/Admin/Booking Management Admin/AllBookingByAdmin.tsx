@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { usePaymentMutation } from "../../../Redux/Feature/Public User/user Booking Management/userBookingManagement";
 import { TQueryParams } from "../../../Types/car.types";
 import { TBookings } from "../../../Types/booking.type";
 import CustomPagination from "../../../components/ui/Pagination/CustomPagination";
@@ -14,12 +13,11 @@ import {
   TableProps,
   Tag,
 } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {  DeleteOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import { handleApiError } from "../../../utils/handleApiError";
 import customPaginationFn from "../../../utils/customPaginationFn";
 import moment from "moment";
-import { MdOutlinePayment } from "react-icons/md";
 import {
   useAllBookingsByAdminQuery,
   useUpdateBookingByAdminMutation,
@@ -33,7 +31,7 @@ const AllBookingByAdmin = () => {
     ...params,
   ]);
   const [updateBookingByAdmin] = useUpdateBookingByAdminMutation();
-  const [createPayment] = usePaymentMutation();
+
   console.log(data?.data?.result);
 
   const tableData: TTableData[] = data?.data?.result?.map(

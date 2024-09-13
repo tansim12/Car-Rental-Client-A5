@@ -13,7 +13,7 @@ import { handleApiError } from "../../utils/handleApiError";
 import { logout, setUser } from "../Feature/Auth/authSlice";
 
 const baseQueryFn = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://assignment-51-l2.vercel.app/api",
   credentials: "include",
   // headers set authorization token
   prepareHeaders: (headers, { getState }) => {
@@ -35,7 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     handleApiError(result?.error);
   }
   if (result?.error?.status === 401) {
-    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+    const res = await fetch("https://assignment-51-l2.vercel.app/api/auth/refresh-token", {
       method: "POST",
       credentials: "include",
     });
