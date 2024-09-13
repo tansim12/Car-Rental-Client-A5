@@ -2,6 +2,8 @@
 import Calender from "../../components/ui/Calender/Calender";
 import { useAdminCarReturnDateQuery } from "../../Redux/Feature/Admin/bookingManagementByAdmin.api";
 import LoadingPage from "../Loading/LoadingPage";
+import DashboardOverview from "./DashboardOverview";
+
 
 const AdminDashboard = () => {
   const { data, isLoading } = useAdminCarReturnDateQuery([]);
@@ -11,8 +13,12 @@ const AdminDashboard = () => {
       end: new Date(item.end),
     })
   );
+
   return (
     <div>
+      <div>
+        <DashboardOverview />
+      </div>
       <div>
         {!isLoading ? (
           <Calender data={eventData} isEnd={true} />
