@@ -1,3 +1,4 @@
+import { Switch } from 'antd';
 import { useState, useEffect } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa'; // Import icons
 
@@ -35,14 +36,18 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className={`${darkMode ? 'dark' : ''} bg-pageBg-light dark:bg-pageBg-dark flex items-center justify-center`}>
-      <button
-        className="px-4 py-2 bg-primary-light dark:bg-primary-dark text-white flex items-center gap-2 transition duration-300 ease-in-out transform hover:scale-105"
-        onClick={toggleDarkMode}
-      >
-        {darkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-blue-500" />}
-      </button>
+    <div className={`${darkMode ? 'dark' : ''} bg-pageBg-light dark:bg-pageBg-dark flex items-center justify-center rounded-xl`}>
+    <div className="flex items-center gap-4">
+      {/* Ant Design Switch */}
+      <Switch
+        checked={darkMode}
+        onChange={toggleDarkMode}
+        checkedChildren={<FaSun size={20} className="text-secondary" />}
+        unCheckedChildren={<FaMoon size={20}  className="text-blue-500" />}
+        className="transition duration-300 ease-in-out"
+      />
     </div>
+  </div>
   );
 };
 
