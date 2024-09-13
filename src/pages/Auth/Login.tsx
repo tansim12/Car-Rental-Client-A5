@@ -37,8 +37,8 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen w-screen bg-pageBg">
-      <div className="max-w-3xl bg-white p-6 shadow-md sm:px-8 sm:py-10 lg:px-12 lg:py-16 dark:bg-zinc-900">
+    <div className="flex justify-center items-center h-screen w-screen bg-[#1b1b1b]">
+      <div className="max-w-3xl  p-6 shadow-md sm:px-8 sm:py-10 lg:px-12 lg:py-16 ">
         <div className="flex flex-col justify-between space-x-0 sm:flex-row sm:space-x-12">
           <div className="mb-8 w-full sm:mb-0 sm:w-1/2">
             {/* Left side form */}
