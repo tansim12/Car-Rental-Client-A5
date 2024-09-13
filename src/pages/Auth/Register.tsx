@@ -4,7 +4,6 @@ import CustomForm from "../../components/From/CustomForm";
 import CustomInput from "../../components/From/CustomInput";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
-import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../Schemas/authSchema";
 import toast from "react-hot-toast";
@@ -13,6 +12,7 @@ import { useAppDispatch } from "../../Redux/hook";
 import { setUser } from "../../Redux/Feature/Auth/authSlice";
 import verifyToken from "../../utils/verifyToken";
 import { handleApiError } from "../../utils/handleApiError";
+import CustomOutlineButton from "../../components/ui/Button/CustomOutlineButton";
 const defaultData = {
   name: "abccc",
   password: "password123",
@@ -112,7 +112,8 @@ const Register = () => {
                 />
               </div>
             </div>
-            <ButtonBackgroundShine name="Submit" width="full" />
+            <CustomOutlineButton name="Login" customCss="w-full"  textColor="black" isTransParent={false} />
+
           </CustomForm>
           <div className="text-center mt-4 ">
             <span>

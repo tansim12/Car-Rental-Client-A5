@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
-import ButtonBackgroundShine from "../../components/ui/Button/ButtonBackgroundShine";
 import CustomForm from "../../components/From/CustomForm";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -10,6 +9,7 @@ import verifyToken from "../../utils/verifyToken";
 import { useAppDispatch } from "../../Redux/hook";
 import { setUser } from "../../Redux/Feature/Auth/authSlice";
 import { handleApiError } from "../../utils/handleApiError";
+import CustomOutlineButton from "../../components/ui/Button/CustomOutlineButton";
 
 const defaultValue = { email: "u4@gmail.com", password: "password123" };
 
@@ -75,11 +75,11 @@ const Login = () => {
                 Submit
                
               </button> */}
-              <ButtonBackgroundShine
+              {/* <ButtonBackgroundShine
                 name="Create Account"
-                width="full
-               "
-              />
+                width="full"
+              /> */}
+              <CustomOutlineButton name="Login" customCss="w-full"  textColor="black" isTransParent={false} />
             </CustomForm>
             <p className="mt-6 flex gap-1 text-sm text-white">
               Did you
