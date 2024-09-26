@@ -79,7 +79,7 @@ const Register = () => {
               <CustomInput
                 name="phone"
                 label="Phone"
-                type="number"
+                type="string"
                 isLabelColor={true}
                 placeholder={"Enter your phone number"}
               />

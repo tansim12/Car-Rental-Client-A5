@@ -28,9 +28,8 @@ const LocationSearch = () => {
             `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`
           );
           const address = response.data.address;
-
           // Extract the district name from the address
-          const district = address.city;
+          const district = address?.state_district.split(" ")?.[0]        
           setDistrictName(district);
         } catch (error) {
           console.error("Error fetching location data:", error);
@@ -43,7 +42,7 @@ const LocationSearch = () => {
   const setLocation = useDispatch();
   const handleSetLocation = () => {
     if (districtName) {
-      setLocation(currentLocation(districtName));
+      setLocation(currentLocation(districtName || "Dhaka"));
       navigate("/listing");
     } else {
       toast.error("Location Something Wrong");
