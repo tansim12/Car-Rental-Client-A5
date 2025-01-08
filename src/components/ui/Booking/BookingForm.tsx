@@ -16,7 +16,11 @@ import toast from "react-hot-toast";
 import { useCreateBookingMutation } from "../../../Redux/Feature/Public User/user";
 import { handleApiError } from "../../../utils/handleApiError";
 import { useNavigate } from "react-router-dom";
+import useAuthUserInfo from "../../../hooks/useAuthUserInfo";
 const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
+  const { user } = useAuthUserInfo();
+  console.log(carData);
+
   const navigate = useNavigate();
   const [createBooking] = useCreateBookingMutation();
   const pickUpLocOptions = carAvailableAreaArray?.map((item) => ({
@@ -130,14 +134,22 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
                   </span>
                 </p>
               </div>
-              <CustomOutlineButton
-                icon={IoCheckmarkDone}
-                isTransParent={false}
-                name="Confirm"
-                customCss="w-full py-5"
-                textColor="black"
-                disabled={carData?.availability !== "available"}
-              />
+              <div
+                onClick={() => {
+                  if (carData?.availability === "available" && !user?.id) {
+                    navigate("/login");
+                  }
+                }}
+              >
+                <CustomOutlineButton
+                  icon={IoCheckmarkDone}
+                  isTransParent={false}
+                  name="Confirm"
+                  customCss="w-full py-5"
+                  textColor="black"
+                  disabled={carData?.availability !== "available"}
+                />
+              </div>
             </div>
           </CustomForm>
         </div>

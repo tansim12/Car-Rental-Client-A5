@@ -3,7 +3,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../components/From/CustomForm";
 import CustomInput from "../../components/From/CustomInput";
 import { useNavigate } from "react-router-dom";
-import SocialLogin from "../../components/ui/SocialLoing/SocialLogin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../Schemas/authSchema";
 import toast from "react-hot-toast";

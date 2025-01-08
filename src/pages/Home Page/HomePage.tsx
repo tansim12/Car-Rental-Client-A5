@@ -7,21 +7,21 @@ import WhyChooseUs from "../../components/ui/Why Choose Us/WhyChooseUs";
 
 const HomePage = () => {
   return (
-    <div className=" ">
+    <div>
       {/* slider  */}
-      <div className="">
+      <div>
         <HomePageSlider />
       </div>
-      <div className="">
+      <div>
         <BannerCard />
       </div>
       {/* feature section  */}
-      <div className="dark:bg-pageBg bg-pageBg-light">
+      <div className="dark:bg-pageBg bg-pageBg-light  ">
         <FeaturedSection />
       </div>
       <div className="">
         <WhyChooseUs />
-        </div>
+      </div>
       {/* customer reviews  */}
       <div className="dark:bg-pageBg bg-pageBg-light">
         <Container>

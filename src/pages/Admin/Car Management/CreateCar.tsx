@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../../components/From/CustomForm";
 import CustomInput from "../../../components/From/CustomInput";
@@ -26,7 +27,7 @@ const CreateCar = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
 
-    const images = await uploadImagesToImgBB(selectImages);
+    const images = await uploadImagesToImgBB(selectImages as any);
     console.log(images);
     
     const payload = {

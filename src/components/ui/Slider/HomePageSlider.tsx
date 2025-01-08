@@ -13,7 +13,7 @@ const HomePageSlider: React.FC = () => {
   };
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-[70vh]">
       {/* Background Image */}
       {!videoLoaded && (
         <img
@@ -43,7 +43,7 @@ const HomePageSlider: React.FC = () => {
       {/* Text and Button */}
       <div className="absolute z-10 w-full h-full flex flex-col justify-center items-center text-center">
         <p className="text-secondary text-lg italic">* Premium</p>
-        <p className="text-5xl md:text-7xl text-white font-serif font-extrabold my-3">
+        <p className="text-3xl md:text-5xl text-white font-serif font-extrabold my-3">
           Rental Car
         </p>
         <p className="text-sm md:text-lg">

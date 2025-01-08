@@ -50,11 +50,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "car-details/:id",
-        element: (
-          <PrivateRoute role="user">
-            <CarDetails />,
-          </PrivateRoute>
-        ),
+        element: <CarDetails />,
       },
       {
         path: "profile",

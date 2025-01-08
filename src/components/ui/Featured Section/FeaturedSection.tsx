@@ -80,8 +80,8 @@ const FeaturedSection: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="mt-20 md:mt-44 -mb-16">
+    <div className="mt-16">
+      <div className="">
         <CustomTitle
           mainTitle="Featured Cars"
           subTitle="Showcasing My Latest car"
@@ -92,7 +92,7 @@ const FeaturedSection: React.FC = () => {
           <Slider {...settings}>
             {data?.data?.result?.map((car: Partial<TCar>) => (
               <div key={car?._id} className="px-4">
-                <div className="bg-secondary hover:bg-white cursor-pointer rounded-xl shadow-lg text-start  lg:h-[70vh] my-32">
+                <div className="bg-secondary hover:bg-white cursor-pointer rounded-xl shadow-lg text-start  lg:h-[70vh] mb-24 md:mb-16">
                   <div className="relative">
                     <img
                       src={

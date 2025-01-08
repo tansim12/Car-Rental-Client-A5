@@ -10,7 +10,7 @@ const CustomTitle = ({
     return (
       <div className="w-full text-center   text-black dark:text-white">
         {/* Main Title */}
-        <h1 className="text-2xl  md:text-4xl font-bold text-designColor mb-4">{mainTitle}</h1>
+        <h1 className="text-2xl  md:text-4xl font-bold text-designColor mb-1">{mainTitle}</h1>
   
         {/* Subtitle */}
         <p className="text-sm md:text-lg text-lightText font-light  ">{subTitle}</p>
