@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unsafe-optional-chaining */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomForm from "../../../components/From/CustomForm";
@@ -44,11 +45,10 @@ const UpdateCar = () => {
   const [updateCar, { isLoading }] = useUpdateCarMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let nimages = [];
-  
     if (selectImages?.length) {
-      nimages = await uploadImagesToImgBB(selectImages);
+      nimages = await uploadImagesToImgBB(selectImages as any);
     }
-  
+
     const payload = {
       ...data,
       seatingCapacity: Number(data?.seatingCapacity),
@@ -56,9 +56,9 @@ const UpdateCar = () => {
       advance: Number(data?.advance),
       rentalPricePerDay: Number(data?.rentalPricePerDay),
       mileage: Number(data?.mileage),
-      images: nimages.length ? [...(data?.images || []), ...nimages] : data?.images || [],
+      images: nimages.length ? nimages : data?.images,
     };
-  
+
     const toastId = toast.loading("Updating...");
     try {
       const newPayload = {
@@ -68,7 +68,7 @@ const UpdateCar = () => {
         id,
       };
       console.log(newPayload);
-  
+
       const res = await updateCar(newPayload).unwrap();
       if (res?.success) {
         toast.success("Car updated successfully!", {
@@ -81,7 +81,8 @@ const UpdateCar = () => {
       handleApiError(error, toastId);
     }
   };
-  
+
+  console.log(carData?.data?.images);
 
   return (
     <div>
@@ -132,12 +133,6 @@ const UpdateCar = () => {
                 />
                 <CustomInput name="advance" label="Advance" type="number" />
               </div>
-
-              <CustomDynamicInput
-                name="images"
-                label="Previous Images"
-                type="text"
-              />
               <CustomDynamicInput
                 name="safetyFeatures"
                 label="Safety Features"
@@ -179,6 +174,18 @@ const UpdateCar = () => {
 
             <div>
               <CustomReactQuill name="description" label="Description" />
+            </div>
+
+            <div className="flex justify-start gap-4 rounded-lg">
+              {carData?.data?.images?.map((item: any) => (
+                <div >
+                  <img
+                    src={item}
+                    alt="image"
+                    className="object-cover size-20"
+                  />
+                </div>
+              ))}
             </div>
 
             <div>

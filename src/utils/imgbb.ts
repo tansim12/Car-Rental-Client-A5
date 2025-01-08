@@ -1,36 +1,42 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const uploadImagesToImgBB = async (files:any) => {
-    const apiKey = '7ef1a84c76b5db81332f5d3ab765a5e3'; // Your API key
-    const expiration = 600; // Image expiration time in seconds
-    const uploadUrl = `https://api.imgbb.com/1/upload?expiration=${expiration}&key=${apiKey}`;
-  
-    const promises = Array.from(files).map((file:any) => {
+export const uploadImagesToImgBB = async (files: FileList) => {
+  try {
+    // Convert FileList to an array
+    const filesArray = Array.from(files);
+
+    // Create an array of promises for each file upload
+    const uploadPromises = filesArray.map((file) => {
       const formData = new FormData();
-      formData.append('image', file); // Convert the image file to base64 string
-  
-      return fetch(uploadUrl, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(result => {
-        if (result.success) {
-          return result.data.url; // Return the URL of the uploaded image
-        } else {
-          throw new Error('Upload failed');
+      formData.append("file", file);
+      formData.append(
+        "upload_preset",
+        import.meta.env.VITE_PUBLIC_CLOUD_PRESET as string
+      );
+
+      return fetch(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUD_NAME
+        }/image/upload`,
+        {
+          method: "POST",
+          body: formData,
         }
-      })
-      .catch(error => {
-        console.error('Error uploading image:', error);
-        return null;
-      });
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to upload image to Cloudinary.");
+          }
+          return response.json();
+        })
+        .then((data) => data.secure_url);
     });
-  
-    try {
-      const uploadedUrls = await Promise.all(promises);
-      return uploadedUrls.filter(url => url !== null); // Return valid URLs only
-    } catch (error) {
-      console.error('Error uploading images:', error);
-      throw error;
-    }
-  };
+
+    // Wait for all uploads to complete
+    const secureUrls = await Promise.all(uploadPromises);
+    return secureUrls;
+  } catch (error) {
+    console.error("Error uploading images:", error);
+    throw error;
+  }
+};
