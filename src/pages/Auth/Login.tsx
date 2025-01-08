@@ -130,7 +130,7 @@ const Login = () => {
               isTransParent={false}
             />
           </CustomForm>
-          <p className="mt-6 flex gap-1 text-sm text-white">
+          {/* <p className="mt-6 flex gap-1 text-sm text-white">
             Did you
             <span
               onClick={() => navigate("/forget-password")}
@@ -138,7 +138,7 @@ const Login = () => {
             >
               forget your password?
             </span>
-          </p>
+          </p> */}
           <div className="text-center mt-4 ">
             <span>
               <span className="light:text-lightText">
