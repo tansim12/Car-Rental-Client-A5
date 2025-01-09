@@ -12,9 +12,18 @@ import ProfileDropDown from "./ProfileDropDown";
 import { TUser } from "../../../Types/user.type";
 import { useDispatch } from "react-redux";
 import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
-import ThemeToggle from "../Theme/ThemeToggle";
+// import ThemeToggle from "../Theme/ThemeToggle";
 
 const Navbar = () => {
+  const handleClick = () => {
+    const phoneNumber = "8801849184000";
+    const message = "Hello, I need assistance.";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(url, "_blank");
+  };
   const navigate = useNavigate();
 
   const user = useAppSelector((s) => s?.auth?.user);
@@ -78,7 +87,10 @@ const Navbar = () => {
               </div>
               {/* contact number  */}
               <div className="flex justify-center items-center gap-5 ">
-                <div className="border rounded-full p-2 border-secondary hover:bg-secondary hover:cursor-pointer">
+                <div
+                  className="border rounded-full p-2 border-secondary hover:bg-secondary hover:cursor-pointer"
+                  onClick={handleClick}
+                >
                   <MdPhoneCallback
                     color="white"
                     size={32}
@@ -92,12 +104,20 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div>
-              <ThemeToggle />
-            </div>
+            <div>{/* <ThemeToggle /> */}</div>
 
             {/* small device menu div  */}
-            <div className="visible md:hidden">
+            <div className="visible md:hidden flex justify-center items-center gap-4">
+              <div
+                className="border rounded-full p-2 border-secondary hover:bg-secondary hover:cursor-pointer"
+                onClick={handleClick}
+              >
+                <MdPhoneCallback
+                  color="white"
+                  size={32}
+                  className="hover:text-primary"
+                />
+              </div>
               <MenuDrawer
                 userData={userData as Partial<TUser>}
                 id={id as string}

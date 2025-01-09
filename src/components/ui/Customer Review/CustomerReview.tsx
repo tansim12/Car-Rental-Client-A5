@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./clipPath.css"
+import "./clipPath.css";
+import CustomTitle from "../Custom Title/CustomTitle";
 
-type TReviewProps ={
-    name:string,
-    text:string,
-    role:string,
-    avatar:string,
-}
+type TReviewProps = {
+  name: string;
+  text: string;
+  role: string;
+  avatar: string;
+};
 
 // Slick settings with responsive breakpoints
 const settings = {
@@ -30,8 +31,8 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 1,
         infinite: true,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 768, // Mobile devices
@@ -39,8 +40,8 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 1,
         infinite: true,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 600, // Mobile devices
@@ -48,14 +49,14 @@ const settings = {
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: true,
-        dots: true
-      }
-    }
-  ]
+        dots: true,
+      },
+    },
+  ],
 };
 
 // ReviewCard Component
-const ReviewCard = ({ review }:any) => (
+const ReviewCard = ({ review }: any) => (
   <div className="relative bg-gray-800 text-white p-6 rounded-lg shadow-lg max-w-sm lg:max-w-md clip-path-custom">
     <div className="absolute top-4 left-4 text-yellow-400 text-4xl">“</div>
     <p className="mt-8 text-gray-300 text-sm leading-relaxed">{review.text}</p>
@@ -87,7 +88,7 @@ const ReviewCard = ({ review }:any) => (
 
 // Testimonials Section Component
 const CustomerReview = () => {
-  const testimonials:TReviewProps[] = [
+  const testimonials: TReviewProps[] = [
     {
       name: "Olivia Brown",
       role: "Customer",
@@ -111,12 +112,14 @@ const CustomerReview = () => {
   return (
     <section className=" pt-5 px-3">
       <div className="max-w-screen-xl mx-auto px-4">
-        <h2 className="text-3xl lg:text-4xl font-bold text-center text-black dark:text-white mb-12">What Clients Say</h2>
+        <div className="mb-5">
+          <CustomTitle mainTitle="What Clients Say" subTitle="Client Experiences That Speak Volumes" />
+        </div>
         <Slider {...settings}>
           {testimonials.map((review, index) => (
             <div key={index}>
               <div className="mx-3 flex justify-center items-center">
-              <ReviewCard review={review} />
+                <ReviewCard review={review} />
               </div>
             </div>
           ))}

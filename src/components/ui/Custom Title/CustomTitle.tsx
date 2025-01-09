@@ -3,7 +3,7 @@ const CustomTitle = ({
   subTitle,
 }: {
   mainTitle: string;
-  subTitle: string;
+  subTitle?: string;
 }) => {
   return (
     <div className="w-full text-center   text-white">

@@ -3,7 +3,7 @@ import logo from "../../../assets/Image/logo.png";
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <div className=" py-12 ">
+    <div className=" py-12 shadow-2xl shadow-white ">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         {/* Contact Info Section */}
         <div className="space-y-6">

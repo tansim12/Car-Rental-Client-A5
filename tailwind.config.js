@@ -10,12 +10,12 @@ export default {
       colors: {
         pageBg: {
           DEFAULT: "#1b1b1b", // Dark mode color
-          light: "#ffffff", // Light mode color
+          light: "#1b1b1b", // Light mode color
           dark: "#1b1b1b", // Same as default for dark mode
         },
         primary: {
           DEFAULT: "#293897",
-          light: "#6cb2eb",
+          light: "#2779bd",
           dark: "#2779bd",
         },
         secondary: {
