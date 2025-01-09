@@ -136,7 +136,7 @@ const BookingForm = ({ carData }: { carData: Partial<TCar> }) => {
               </div>
               <div
                 onClick={() => {
-                  if (carData?.availability === "available" && !user?.id) {
+                  if (!user?.id) {
                     navigate("/login");
                   }
                 }}
