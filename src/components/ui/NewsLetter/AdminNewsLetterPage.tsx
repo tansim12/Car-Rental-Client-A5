@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button, Table, Modal, Checkbox } from "antd";
 import { toast } from "react-hot-toast";
 import moment from "moment";
