@@ -19,6 +19,7 @@ export const adminPath: IAccRoutes[] = [
     path: "newsletter",
     element: <AdminNewsLetterPage />,
   },
+
   {
     name: "User Management",
     children: [

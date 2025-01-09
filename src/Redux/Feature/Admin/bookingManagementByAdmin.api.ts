@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TQueryParams } from "../../../Types/car.types";
 import { baseApi } from "../../api/baseApi";
 
@@ -100,6 +101,14 @@ const bookingManagementByAdminApi = baseApi.injectEndpoints({
       },
       providesTags: ["Booking"],
     }),
+    monthRevenue: builder.query({
+      query: (_args) => {
+        return {
+          url: "/bookings/admin/monthly/revenue",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -107,5 +116,6 @@ export const {
   useAllBookingsByAdminQuery,
   useUpdateBookingByAdminMutation,
   useAdminCarReturnDateQuery,
-  useAdminDashboardAggregateDataQuery
+  useAdminDashboardAggregateDataQuery,
+  useMonthRevenueQuery,
 } = bookingManagementByAdminApi;

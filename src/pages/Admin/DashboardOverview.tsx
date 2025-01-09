@@ -26,7 +26,7 @@ const DashboardOverview = () => {
           <FaMoneyBillWave className="text-4xl text-green-500 mr-4" />
           <div>
             <h2 className="text-lg font-semibold">Total Cost</h2>
-            <p className="text-xl font-bold">${data?.data?.totalCost}</p>
+            <p className="text-xl font-bold">৳ {data?.data?.totalCost}</p>
           </div>
         </div>
 
