@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/Image/logo.png";
 const Footer = () => {
   const navigate = useNavigate();
@@ -61,29 +61,19 @@ const Footer = () => {
           <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <Link to={"/"} className="text-gray-400 hover:text-white">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to={"/listing"}  className="text-gray-400 hover:text-white">
+                Car Listing
+              </Link>
+            </li>
+            <li>
+              <Link to={"/about"}  className="text-gray-400 hover:text-white">
                 About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-white">
-                Cars
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-white">
-                Car Types
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-white">
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-white">
-                Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
