@@ -63,14 +63,13 @@ const WhyChooseUs = () => {
         <main>
           <article>
             <header className="text-white relative w-full mb-16 place-content-center  ">
-              <h1 className="text-6xl font-bold text-center tracking-tight">
-                Why Choose Us for <br />
-                <span className="text-secondary">Car Rentals </span>
+              <h1 className="text-6xl font-bold my-5 text-center tracking-tight">
+                <span className="font-custom ">Why Choose Us for</span> <br />
+                <span className="text-secondary ">Car Rentals </span>
               </h1>
             </header>
             <section className="h-[300vh] relative   ">
               <ul ref={ulRef} className="flex sticky top-0">
-              
                 <li className="h-screen w-screen flex-shrink-0 bg-blue-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     WORK
@@ -107,7 +106,6 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-               
               </ul>
             </section>
           </article>

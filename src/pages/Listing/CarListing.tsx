@@ -55,7 +55,7 @@ const CarListing = () => {
           {/* car show div  */}
           <div className="text-white text-lg mt-20 col-span-12 md:col-span-9 ">
             {!isFetching ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 justify-center items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center items-center">
                 {data?.data?.result.length ? (
                   data?.data?.result?.map((item: Partial<TCar>) => (
                     <CarCard key={item?._id} item={item} />
