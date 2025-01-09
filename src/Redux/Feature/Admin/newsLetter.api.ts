@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { baseApi } from "../../api/baseApi";
 
 const newsLetterApi = baseApi.injectEndpoints({
@@ -21,7 +22,7 @@ const newsLetterApi = baseApi.injectEndpoints({
       },
     }),
     findAllNewsLetterEmail: builder.query({
-      query: () => {
+      query: (_arg) => {
         return {
           url: "/newsLetter",
           method: "GET",

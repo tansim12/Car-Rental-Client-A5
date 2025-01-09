@@ -1,3 +1,4 @@
+import AdminNewsLetterPage from "../components/ui/NewsLetter/AdminNewsLetterPage";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AllBookingByAdmin from "../pages/Admin/Booking Management Admin/AllBookingByAdmin";
 import CreateCar from "../pages/Admin/Car Management/CreateCar";
@@ -12,6 +13,11 @@ export const adminPath: IAccRoutes[] = [
     name: "Dashboard",
     path: "dashboard",
     element: <AdminDashboard />,
+  },
+  {
+    name: "Newsletter",
+    path: "newsletter",
+    element: <AdminNewsLetterPage />,
   },
   {
     name: "User Management",
