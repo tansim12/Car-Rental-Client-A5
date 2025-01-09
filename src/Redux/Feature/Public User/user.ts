@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TQueryParams } from "../../../Types/car.types";
 import { TReduxResponse } from "../../../Types/response.type";
 import { TUser } from "../../../Types/user.type";
@@ -55,6 +57,19 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["AllCars"],
     }),
+
+    getMostBookingCars: builder.query({
+      query: (_arg = null) => {
+        return {
+          url: `/cars/most/booking`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: TReduxResponse<any>) => {
+        return response?.data;
+      },
+    }),
+    
   }),
 });
 
@@ -62,4 +77,5 @@ export const {
   useGetUserInfoQuery,
   useGetAllCarsByUserQuery,
   useCreateBookingMutation,
+  useGetMostBookingCarsQuery,
 } = userApi;
