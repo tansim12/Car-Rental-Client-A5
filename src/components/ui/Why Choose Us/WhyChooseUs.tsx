@@ -2,10 +2,9 @@ import { useEffect, useRef } from "react";
 import { animate, scroll, spring } from "motion";
 import { ReactLenis } from "lenis/react";
 import working from "../../../assets/Image/working2.jpg";
-import flexab from "../../../assets/Image/flexablity.jpg";
+
 import afford from "../../../assets/Image/afford.jpg";
 import variety from "../../../assets/Image/Variety.jpg";
-import Reliability from "../../../assets/Image/Reliability.webp";
 
 const WhyChooseUs = () => {
   const ulRef = useRef<HTMLUListElement | null>(null);
@@ -69,20 +68,9 @@ const WhyChooseUs = () => {
                 <span className="text-secondary">Car Rentals </span>
               </h1>
             </header>
-            <section className="h-[500vh] relative   ">
+            <section className="h-[300vh] relative   ">
               <ul ref={ulRef} className="flex sticky top-0">
-                <li className="h-screen w-screen flex-shrink-0 bg-red-400 flex flex-col justify-center overflow-hidden items-center">
-                  <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    Flexibility
-                  </h2>
-                  <img
-                    src={flexab}
-                    className="2xl:w-[550px] w-[380px] absolute bottom-0"
-                    width={500}
-                    height={500}
-                    alt="image"
-                  />
-                </li>
+              
                 <li className="h-screen w-screen flex-shrink-0 bg-blue-400 flex flex-col justify-center overflow-hidden items-center">
                   <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
                     WORK
@@ -119,18 +107,7 @@ const WhyChooseUs = () => {
                     alt="image"
                   />
                 </li>
-                <li className="h-screen w-screen flex-shrink-0 bg-green-400 flex flex-col justify-center overflow-hidden items-center">
-                  <h2 className="text-[20vw] font-semibold relative bottom-5 inline-block text-black">
-                    Reliability
-                  </h2>
-                  <img
-                    src={Reliability}
-                    className="2xl:w-[550px] w-[380px] absolute bottom-0"
-                    width={500}
-                    height={500}
-                    alt="image"
-                  />
-                </li>
+               
               </ul>
             </section>
           </article>

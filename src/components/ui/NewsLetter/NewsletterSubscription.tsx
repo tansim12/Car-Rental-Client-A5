@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 
 import newsLetterImg from "../../../assets/newsletter.png";
+import { useCreateNewsLetterMutation } from "../../../Redux/Feature/Admin/newsLetter.api";
 
 export function NewsletterSubscription() {
   const [email, setEmail] = useState("");
@@ -21,16 +22,24 @@ export function NewsletterSubscription() {
     return () => observer.disconnect();
   }, []);
 
-  //   const { isSuccess, mutate } = useNewsLetterCreate();
-  const handleSubmit = (e: React.FormEvent) => {
+  const [createNewsLetter] = useCreateNewsLetterMutation();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
+    const payload = {
+      email: email,
+    };
+    const res = await createNewsLetter(payload);
+    console.log(res);
+    if (res.data?.success) {
+      toast.success("Thank you for joining our camping community!");
+    } else {
+      toast.success("This Email Already Exist");
+    }
 
-    // mutate({ payload: { email } });
-    toast.success("Thank you for joining our camping community!");
     setIsSubscribed(true);
   };
 
@@ -59,7 +68,7 @@ export function NewsletterSubscription() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full max-w-md px-4 py-2 text-lg rounded-lg border-2 border-brown focus:outline-none focus:border-forest-green mb-4 transition-transform duration-300 ease-in-out hover:scale-105"
+                className="w-full max-w-md px-4 py-2 text-lg rounded-lg border-2 border-brown focus:outline-none focus:border-forest-green mb-4 transition-transform duration-300 ease-in-out hover:scale-105 text-black"
               />
               <button
                 type="submit"
