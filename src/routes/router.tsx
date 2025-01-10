@@ -14,9 +14,6 @@ import AboutUs from "../pages/About/AboutUs";
 import PaymentCancelPage from "../pages/Payment pages/PaymentCancelPage";
 import PaymentSuccessPage from "../pages/Payment pages/PaymentSuccessPage";
 import PaymentFailed from "../pages/Payment pages/PaymentFailed";
-import ProfilePage from "../pages/Profile/ProfilePage";
-import EditProfilePage from "../pages/Profile/EditProfilePage";
-import BothPrivateRoute from "./BothPrivateRoute";
 import ForgetPassword from "../pages/Forgat Password/ForgetPassword";
 export const router = createBrowserRouter([
   {
@@ -52,22 +49,7 @@ export const router = createBrowserRouter([
         path: "car-details/:id",
         element: <CarDetails />,
       },
-      {
-        path: "profile",
-        element: (
-          <BothPrivateRoute roles={["user", "admin"]}>
-            <ProfilePage />,
-          </BothPrivateRoute>
-        ),
-      },
-      {
-        path: "edit-profile",
-        element: (
-          <BothPrivateRoute roles={["user", "admin"]}>
-            <EditProfilePage />,
-          </BothPrivateRoute>
-        ),
-      },
+     
     ],
   },
 

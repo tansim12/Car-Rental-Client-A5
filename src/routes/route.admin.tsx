@@ -1,4 +1,5 @@
 import AdminNewsLetterPage from "../components/ui/NewsLetter/AdminNewsLetterPage";
+import Profile from "../components/ui/Profile/Profile";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AllBookingByAdmin from "../pages/Admin/Booking Management Admin/AllBookingByAdmin";
 import CreateCar from "../pages/Admin/Car Management/CreateCar";
@@ -64,6 +65,11 @@ export const adminPath: IAccRoutes[] = [
     ],
     path: "",
     element: undefined,
+  },
+  {
+    name: "Profile",
+    path: "Profile",
+    element: <Profile />,
   },
 ];
 

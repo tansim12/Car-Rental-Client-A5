@@ -1,4 +1,4 @@
-
+import Profile from "../components/ui/Profile/Profile";
 import AllBookingByUser from "../pages/User/Booking Management By user/AllBookingByUser";
 import UserDashboard from "../pages/User/UserDashboard";
 import { IAccRoutes } from "../Types/routes.type";
@@ -11,19 +11,15 @@ export const userPath: IAccRoutes[] = [
     element: <UserDashboard />,
   },
   {
-    name: "Booking Management",
-    children: [
-      {
-        name: "All Bookings",
-        path: "all-bookings",
-        element: <AllBookingByUser />,
-      },
-      
-    ],
-    path: "",
-    element: undefined,
+    name: "All Bookings",
+    path: "all-bookings",
+    element: <AllBookingByUser />,
   },
- 
+  {
+    name: "Profile",
+    path: "Profile",
+    element: <Profile />,
+  },
 ];
 
 // logical way creating  [{path:"----", element:<--- />}] such as routes.tsx

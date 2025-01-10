@@ -66,12 +66,6 @@ const ProfileDropDown: React.FC<ProfileDropDownProps> = ({
         >
           <div
             className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
-            onClick={() => handleNavigation("/profile")}
-          >
-            Profile
-          </div>
-          <div
-            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
             onClick={() => handleNavigation(`/${userData?.role}/dashboard`)}
           >
             Dashboard
