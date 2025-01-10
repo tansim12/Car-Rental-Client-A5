@@ -14,7 +14,7 @@ import AboutUs from "../pages/About/AboutUs";
 import PaymentCancelPage from "../pages/Payment pages/PaymentCancelPage";
 import PaymentSuccessPage from "../pages/Payment pages/PaymentSuccessPage";
 import PaymentFailed from "../pages/Payment pages/PaymentFailed";
-import ForgetPassword from "../pages/Forgat Password/ForgetPassword";
+
 export const router = createBrowserRouter([
   {
     path: "/",
