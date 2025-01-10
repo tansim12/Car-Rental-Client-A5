@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Form, Input, Modal, Button } from "antd";
+import { Modal, Button } from "antd";
 import { EditOutlined, LockOutlined } from "@ant-design/icons";
 import CustomForm from "../../From/CustomForm";
 import CustomInput from "../../From/CustomInput";
@@ -12,6 +12,10 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import LoadingPage from "../../../pages/Loading/LoadingPage";
 import { uploadImagesToImgBB } from "../../../utils/imgbb";
 import toast from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { forgetPasswordSchemaZod } from "../../../Schemas/forgetPasswordSchema";
+import { useForgetPasswordMutation } from "../../../Redux/Feature/Auth/authApi";
+import { handleApiError } from "../../../utils/handleApiError";
 
 const Profile: React.FC = () => {
   const user = useAppSelector((s) => s?.auth?.user);
@@ -26,12 +30,9 @@ const Profile: React.FC = () => {
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
     useState(false);
 
-  console.log(userData);
-
   const [selectImages, setSelectImages] = useState([]);
   // Handle form submission for editing profile
   const handleEditSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     let image = [];
     if (selectImages?.length > 0) {
       image = await uploadImagesToImgBB(selectImages as any);
@@ -56,9 +57,27 @@ const Profile: React.FC = () => {
     setIsEditModalOpen(false);
   };
 
+  const [forgetPassword] = useForgetPasswordMutation();
+
   // Handle password change submission
-  const handleChangePasswordSubmit = (values: any) => {
-    console.log("Password Changed:", values);
+  const handleChangePasswordSubmit = async (data: any) => {
+    if (data?.newPassword !== data?.confirmNewPassword) {
+      return toast.error("New Password and Confirm new password not match");
+    }
+    const toastId = toast.loading("Forget ....");
+    const payload = {
+      email: userData?.email,
+      newPassword: data?.newPassword,
+      oldPassword: data?.oldPassword,
+    };
+    try {
+      const res = await forgetPassword(payload).unwrap();
+      if (res?.success) {
+        toast.success("Forget Password Done", { id: toastId, duration: 3000 });
+      }
+    } catch (error) {
+      handleApiError(error, toastId);
+    }
     setIsChangePasswordModalOpen(false);
   };
 
@@ -99,7 +118,7 @@ const Profile: React.FC = () => {
               >
                 Change Password
               </Button>
-              <Button type="default" danger>
+              <Button type="default" disabled danger>
                 Reset Password
               </Button>
             </div>
@@ -153,51 +172,27 @@ const Profile: React.FC = () => {
             onCancel={() => setIsChangePasswordModalOpen(false)}
             footer={null}
           >
-            <Form layout="vertical" onFinish={handleChangePasswordSubmit}>
-              <Form.Item
-                label="Current Password"
-                name="currentPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter your current password",
-                  },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item
-                label="New Password"
-                name="newPassword"
-                rules={[
-                  { required: true, message: "Please enter a new password" },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item
-                label="Confirm New Password"
-                name="confirmNewPassword"
-                dependencies={["newPassword"]}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your new password",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("newPassword") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error("Passwords do not match!")
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
+            <CustomForm
+              onSubmit={handleChangePasswordSubmit}
+              resolver={zodResolver(forgetPasswordSchemaZod)}
+            >
+              <div>
+                <CustomInput
+                  name="oldPassword"
+                  label="Old Password"
+                  type="text"
+                />
+                <CustomInput
+                  name="newPassword"
+                  label="New Password"
+                  type="text"
+                />
+                <CustomInput
+                  name="confirmNewPassword"
+                  label="Confirm New Password"
+                  type="text"
+                />
+              </div>
               <div className="flex justify-end">
                 <Button
                   type="default"
@@ -209,7 +204,7 @@ const Profile: React.FC = () => {
                   Change Password
                 </Button>
               </div>
-            </Form>
+            </CustomForm>
           </Modal>
         </div>
       )}
