@@ -109,6 +109,14 @@ const bookingManagementByAdminApi = baseApi.injectEndpoints({
         };
       },
     }),
+    userMonthlyCost: builder.query({
+      query: (_args) => {
+        return {
+          url: "/bookings/user/monthly/cost",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -118,4 +126,5 @@ export const {
   useAdminCarReturnDateQuery,
   useAdminDashboardAggregateDataQuery,
   useMonthRevenueQuery,
+  useUserMonthlyCostQuery,
 } = bookingManagementByAdminApi;

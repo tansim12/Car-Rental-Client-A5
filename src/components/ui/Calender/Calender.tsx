@@ -17,7 +17,6 @@ const Calender = ({ data, isEnd = false }: { data: any; isEnd?: boolean }) => {
   //     },
   // ];
 
-  console.log(data);
   
   return (
     <div>

@@ -1,23 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Calender from "../../components/ui/Calender/Calender";
-import { useUserBookingScheduleQuery } from "../../Redux/Feature/Public User/user Booking Management/userBookingManagement";
-import LoadingPage from "../Loading/LoadingPage";
 
+
+import { useUserMonthlyCostQuery } from "../../Redux/Feature/Admin/bookingManagementByAdmin.api";
+import RevenueByMonthChart from "../../components/ui/Chart/RevenueByMonthChart";
 const UserDashboard = () => {
-  const { data, isLoading } = useUserBookingScheduleQuery([]);
-  const eventData = data?.data?.map(
-    (item: {
-      title: any;
-      start: string | number | Date;
-      end: string | number | Date;
-    }) => ({
-      title: item.title,
-      start: new Date(item.start),
-      end: new Date(item.end),
-    })
-  );
+  const { data: revenueData } = useUserMonthlyCostQuery({});
+
   return (
-    <div>{!isLoading ? <Calender data={eventData} /> : <LoadingPage />}</div>
+    <div>
+      <div>
+        <p className="text-center text-3xl font-bold my-10 border-b">
+          My Every Month Cost Chart
+        </p>
+      </div>
+      <div>
+        <RevenueByMonthChart revenueByMonth={revenueData?.data} />
+      </div>
+    </div>
   );
 };
 

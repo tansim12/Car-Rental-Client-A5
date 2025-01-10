@@ -1,3 +1,4 @@
+import UserTripCalenderPage from "../components/ui/Calender/UserTripCalenderPage";
 import Profile from "../components/ui/Profile/Profile";
 import AllBookingByUser from "../pages/User/Booking Management By user/AllBookingByUser";
 import UserDashboard from "../pages/User/UserDashboard";
@@ -9,6 +10,11 @@ export const userPath: IAccRoutes[] = [
     name: "Dashboard",
     path: "dashboard",
     element: <UserDashboard />,
+  },
+  {
+    name: "Booking Calender",
+    path: "booking-calender",
+    element: <UserTripCalenderPage />,
   },
   {
     name: "All Bookings",
