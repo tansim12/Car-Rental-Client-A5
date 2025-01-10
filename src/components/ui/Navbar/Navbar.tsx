@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
 // import ThemeToggle from "../Theme/ThemeToggle";
 
+import CategoryMegaMenu from "./CategoryMegaMenu";
 const Navbar = () => {
   const handleClick = () => {
     const phoneNumber = "8801849184000";
@@ -30,6 +31,7 @@ const Navbar = () => {
   const id = user ? user?.id : null;
   const { data: userData } = useGetUserInfoQuery(id, { skip: !id });
   const setLocation = useDispatch();
+
   return (
     <div className="absolute w-full  ">
       {/* navbar  */}
@@ -50,6 +52,7 @@ const Navbar = () => {
             <div className=" hidden md:flex justify-evenly items-center gap-5 w-[75%] ">
               <div className="text-white flex items-center  gap-5 text-sm w-full justify-end">
                 <CustomNavLink label="Home" to="/" fontWidth="16px" />
+
                 <div
                   onClick={(e) => {
                     e.preventDefault();
@@ -63,6 +66,8 @@ const Navbar = () => {
                     fontWidth="16px"
                   />
                 </div>
+                {/* category mega menu  */}
+                <CategoryMegaMenu />
 
                 <CustomNavLink label="About" to="/about" fontWidth="16px" />
 

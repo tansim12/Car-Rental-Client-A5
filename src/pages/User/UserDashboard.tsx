@@ -8,7 +8,7 @@ const UserDashboard = () => {
   return (
     <div>
       <div>
-        <p className="text-center text-3xl font-bold my-10 border-b">
+        <p className="text-center text-3xl font-bold my-10 ">
           My Every Month Cost Chart
         </p>
       </div>

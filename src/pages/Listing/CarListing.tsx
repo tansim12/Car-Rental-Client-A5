@@ -10,12 +10,19 @@ import { useEffect, useState } from "react";
 import customPaginationFn from "../../utils/customPaginationFn";
 import LoadingPage from "../Loading/LoadingPage";
 import { useAppSelector } from "../../Redux/hook";
+import { useSearchParams } from "react-router-dom";
 
 const CarListing = () => {
+  const [searchParams] = useSearchParams();
+
+  const category = searchParams.get("category");
+
   const [params, setParams] = useState<TQueryParams[]>([]);
   const currentLocation = useAppSelector((s) => s.location);
   const { data, isFetching, refetch } = useGetAllCarsByUserQuery([
     { name: "sort", value: "-createdAt" },
+    // { name: "category", value: category },
+    ...(category ? [{ name: "category", value: category }] : []), // Add category if available
     {
       name: "fields",
       value:
@@ -25,14 +32,18 @@ const CarListing = () => {
   ]);
   const handlePagination = customPaginationFn(setParams);
   useEffect(() => {
-    if (currentLocation !== null && currentLocation !== undefined  && currentLocation !== "") {
-      setParams(prevParams => [
+    if (
+      currentLocation !== null &&
+      currentLocation !== undefined &&
+      currentLocation !== ""
+    ) {
+      setParams((prevParams) => [
         { name: "availableAreas", value: currentLocation },
         ...prevParams,
       ]);
-      refetch()
+      refetch();
     }
-  }, [currentLocation,refetch]);
+  }, [currentLocation, refetch]);
   return (
     <div>
       <div className="">

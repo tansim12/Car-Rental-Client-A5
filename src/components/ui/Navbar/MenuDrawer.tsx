@@ -11,6 +11,7 @@ import CustomOutlineButton from "../Button/CustomOutlineButton";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { currentLocation } from "../../../Redux/Feature/Normal/availableAreaSlice";
+import CategoryMegaMenu from "./CategoryMegaMenu";
 
 const MenuDrawer = ({
   userData,
@@ -63,6 +64,9 @@ const MenuDrawer = ({
           >
             <CustomNavLink label="Car Listing" to="/listing" fontWidth="16px" />
           </div>
+
+          {/* category mega menu  */}
+          <CategoryMegaMenu />
 
           <CustomNavLink label="About" to="/about" fontWidth="16px" />
 
