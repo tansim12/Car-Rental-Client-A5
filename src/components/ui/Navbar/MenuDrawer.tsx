@@ -41,7 +41,6 @@ const MenuDrawer = ({
       <Drawer
         title="Navbar"
         autoFocus={false}
-        closeIcon={<IoMdClose className="text-white" />}
         placement={"left"}
         closable={false}
         onClose={onClose}
@@ -49,10 +48,13 @@ const MenuDrawer = ({
         key={"left"}
         bodyStyle={{ backgroundColor: "#1b1b1b" }} // Ensure the body of the drawer is black as well
       >
-        {/* <div className="flex flex-col gap-3">
-          <CustomNavLink label="Home" to="/"  />
-          <CustomNavLink label="About" to="/about"  />
-        </div> */}
+        {/* Close Button */}
+        <div className="flex justify-end mb-4 absolute top-2 right-1">
+          <Button onClick={onClose} className="rounded-full ">
+            <IoMdClose color="red" size={24} />
+          </Button>
+        </div>
+
         <div className="text-white flex flex-col items-center  gap-5 text-sm w-full justify-end">
           <CustomNavLink label="Home" to="/" fontWidth="16px" />
           <div

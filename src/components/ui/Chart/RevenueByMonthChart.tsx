@@ -11,7 +11,6 @@ import {
   } from "recharts";
   
   const RevenueByMonthChart = ({ revenueByMonth }: { revenueByMonth: any }) => {
-    console.log(revenueByMonth); // Debugging the data
     return (
       <div className="chart-container" style={{ width: "100%", height: "400px" }}>
         <ResponsiveContainer width="100%" height="100%">

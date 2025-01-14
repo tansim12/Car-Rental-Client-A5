@@ -15,7 +15,7 @@ const MostBookingCar = () => {
           subTitle="Showcasing My top booking car"
         />
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 container mx-auto px-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 container mx-auto px-3">
         {isLoading
           ? Array(6)
               .fill(0)

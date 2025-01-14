@@ -117,6 +117,14 @@ const bookingManagementByAdminApi = baseApi.injectEndpoints({
         };
       },
     }),
+    userPaymentAnalytics: builder.query({
+      query: (_args) => {
+        return {
+          url: "/bookings/user/payment/status",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -127,4 +135,5 @@ export const {
   useAdminDashboardAggregateDataQuery,
   useMonthRevenueQuery,
   useUserMonthlyCostQuery,
+  useUserPaymentAnalyticsQuery,
 } = bookingManagementByAdminApi;
